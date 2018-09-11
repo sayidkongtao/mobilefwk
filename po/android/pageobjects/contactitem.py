@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepageobject import BasePageObject
-from utils.utils import Utils
 from po.android.pageobjects.input import Input
 from po.android.pageobjects.text import Text
+from utils.utils import Utils
 
 
 class ContactItem(BasePageObject):
@@ -42,4 +45,3 @@ class ContactItem(BasePageObject):
             "ContactItem",
             self.root
         )
-

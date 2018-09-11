@@ -1,10 +1,14 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
 import logging
 import os
 import unittest
 
 from appium import webdriver
-from po.android.androdpages import AndroidPages
+
 from common import globalvariable
+from po.android.androdpages import AndroidPages
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)

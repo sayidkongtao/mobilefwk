@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
+
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepageobject import BasePageObject

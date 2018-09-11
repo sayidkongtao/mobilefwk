@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
 import logging.handlers
 
 

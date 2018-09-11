@@ -1,11 +1,16 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
+
 import logging
+import time
 
 from appium.webdriver.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+
 from common import globalvariable
 from common.basepageobject import BasePageObject
-import time
 
 
 class Utils:
