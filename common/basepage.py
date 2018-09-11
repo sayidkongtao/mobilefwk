@@ -65,6 +65,7 @@ class BasePage:
         y1 = int(self.window_height * 0.75)  # 起始y坐标
         y2 = int(self.window_height * 0.25)  # 终点y坐标
         self.driver.swipe(x1, y1, x1, y2, t)
+        time.sleep(1.5)
 
     # 屏幕向下滑动
     def swipe_down(self, t=1000):
@@ -72,6 +73,7 @@ class BasePage:
         y1 = int(self.window_height * 0.25)  # 起始y坐标
         y2 = int(self.window_height * 0.75)  # 终点y坐标
         self.driver.swipe(x1, y1, x1, y2, t)
+        time.sleep(1.5)
 
     # 屏幕向左滑动
     def swipe_left(self, t=1000):
@@ -79,6 +81,7 @@ class BasePage:
         y1 = int(self.window_height * 0.5)
         x2 = int(self.window_width * 0.05)
         self.driver.swipe(x1, y1, x2, y1, t)
+        time.sleep(1.5)
 
     # 屏幕向右滑动
     def swipe_right(self, t=1000):
@@ -86,6 +89,7 @@ class BasePage:
         y1 = int(self.window_height * 0.5)
         x2 = int(self.window_width * 0.75)
         self.driver.swipe(x1, y1, x2, y1, t)
+        time.sleep(1.5)
 
     # savePngName:生成图片的名称
     def save_png_name(self, name):

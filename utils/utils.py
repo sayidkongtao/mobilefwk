@@ -58,7 +58,8 @@ class Utils:
     @classmethod
     def is_visible(cls, element_name, page_object_class, search_context, locator=None, default_time=10):
         try:
-            cls.find_wait_for_visible(element_name, page_object_class, locator, search_context, default_time)
+            cls.find_wait_for_visible(element_name, page_object_class, search_context, locator, default_time)
             return True
         except TimeoutException:
+            logging.info("{} is not visible".format(element_name))
             return False

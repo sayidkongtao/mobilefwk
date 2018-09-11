@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 import logging
-
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
-
 from common import globalvariable
 
 
@@ -54,7 +52,7 @@ class BasePageObject:
             raise e
 
     # 重新封装输入方法
-    def send_keys(self, value, clear_first=True, click_first=True):
+    def send_keys(self, value, clear_first=False, click_first=False):
         try:
             if click_first:
                 self.click()
@@ -73,4 +71,14 @@ class BasePageObject:
             self.__root.click()
         except AttributeError as e:
             self.logger.error("%s 页面未能找到 %s 按钮" % (self, self.element_name))
+            raise e
+
+    def text(self):
+        try:
+            self.logger.info("get element {} text".format(self.element_name))
+            text = self.__root.text
+            self.logger.info("get element {} text: {}".format(self.element_name, text))
+            return text
+        except AttributeError as e:
+            self.logger.error("%s 页面未能找到 %s 文本" % (self, self.element_name))
             raise e

@@ -3,7 +3,7 @@ import os
 import unittest
 
 from appium import webdriver
-
+from po.android.androdpages import AndroidPages
 from common import globalvariable
 
 PATH = lambda p: os.path.abspath(
@@ -31,3 +31,4 @@ class CommonUnittest(unittest.TestCase):
         cls.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", cls.desired_caps)
         globalvariable.init(cls.desired_caps.get("deviceName", None))
         cls.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
+        cls.android_pages = AndroidPages(cls.driver)
