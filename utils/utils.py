@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from common import globalvariable
 from common.basepageobject import BasePageObject
+import time
 
 
 class Utils:
@@ -45,3 +46,18 @@ class Utils:
                 element_obj.text if element_obj.text != "" else element_obj.tag_name)
             )
             WebDriverWait(appium_driver, default_time).until_not(ec.visibility_of(element_obj))
+
+    @classmethod
+    def wait_until_condition(cls, method, default_time=30):
+        end_time = time.time() + default_time
+        while True:
+            try:
+                value = method()
+                if value:
+                    return value
+            except Exception as e:
+                cls.logger().info("Continue to wait")
+            time.sleep(2)
+            if time.time() > end_time:
+                break
+        raise Exception("Timeout to wait for condition")

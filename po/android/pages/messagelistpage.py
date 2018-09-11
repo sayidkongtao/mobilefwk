@@ -13,7 +13,7 @@ class MessageListPage(BasePage):
 
     @property
     def refresh_quee_view_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/refresh_quee_view"),
             "refresh_quee_view_button",
@@ -43,7 +43,9 @@ class MessageListPage(BasePage):
 
 # page logic
     def at_message_list_page(self):
-        return self.write_email_button.is_visible()
+        self.logger.info("Wait for page MessageListPage")
+        Utils.wait_until_condition(lambda: self.driver.current_activity == ".activity.MessageList")
+        return True
 
     def check_update(self):
         self.logger.info("check whether has version update")
@@ -62,5 +64,4 @@ class MessageListPage(BasePage):
 
     def wait_for_page_fresh(self):
         refresh_quee_view_button = self.refresh_quee_view_button
-        if refresh_quee_view_button.is_visible():
-            Utils.wait_disappear(refresh_quee_view_button)
+        Utils.wait_disappear(refresh_quee_view_button)

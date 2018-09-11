@@ -20,9 +20,8 @@ class Demo(CommonUnittest):
         self.android_pages.navigationpage.goto_accountdomainselect()
         self.android_pages.accountdomainselectpage.goto_login()
         self.android_pages.loginpage.goto_message_list()
+        self.assertTrue(self.android_pages.messagelistpage.at_message_list_page())
         self.android_pages.messagelistpage.check_update()
-        login_success = self.android_pages.messagelistpage.at_message_list_page()
-        self.assertTrue(login_success)
         self.android_pages.messagelistpage.wait_for_page_fresh()
 
     def test_goto_write_email_page_5(self):
