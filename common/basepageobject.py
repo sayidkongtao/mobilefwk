@@ -4,81 +4,104 @@ import logging
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from common import globalvariable
+from selenium.common.exceptions import TimeoutException
 
 
 class BasePageObject:
 
     # LOCATOR = (MobileBy.XPATH, "//button")
 
-    def __init__(self, web_element, element_name):
-        self.__root = web_element
+    def __init__(self, locator, element_name, page_name, search_context, default_time=30):
+        self.locator = locator
         self.element_name = element_name
+        self.__driver = search_context
+        self.page_name = page_name
+        self.default_time = default_time
         self.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
 
     @property
     def root(self):
-        return self.__root
+        return self.find_element(self.locator)
 
-    def child_element(self, locator, visible=True, default_time=30):
+    def find_element(self, visible=True):
         try:
             if visible:
-                return WebDriverWait(self.__root, default_time).until(
-                    ec.visibility_of_element_located(locator)
+                return WebDriverWait(self.__driver, self.default_time).until(
+                    ec.visibility_of_element_located(self.locator)
                 )
             else:
-                return WebDriverWait(self.__root, default_time).until(
-                    ec.presence_of_element_located(locator)
+                return WebDriverWait(self.__driver, self.default_time).until(
+                    ec.presence_of_element_located(self.locator)
                 )
         except Exception as e:
-            self.logger.error("%s 页面中未能找到 %s 元素" % (self, locator))
+            self.logger.error(
+                "on {} cannot find element: {}, locator: {}".format(self.page_name, self.element_name, self.locator)
+            )
             raise e
 
-    # 重新封装一组元素定位方法
-    def child_elements(self, locator):
+    def find_elements(self, visible=True):
         try:
-            if len(self.__root.find_elements(locator)):
-                return self.__root.find_elements(locator)
+            if visible:
+                WebDriverWait(self.__driver, self.default_time).until(
+                    ec.visibility_of_all_elements_located(self.locator)
+                )
+            else:
+                WebDriverWait(self.__driver, self.default_time).until(
+                    ec.presence_of_all_elements_located(self.locator)
+                )
+
         except Exception as e:
-            self.logger.error("%s 页面中未能找到 %s 元素" % (self, locator))
+            self.logger.error(
+                "on {} cannot find elements: {}, locator: {}".format(self.page_name, self.element_name, self.locator)
+            )
             raise e
 
-    # 重新封装输入方法
     def clear(self):
-        try:
-            self.logger.info("clear text on {}".format(self.element_name))
-            self.__root.clear()
-        except AttributeError as e:
-            self.logger.error("%s 页面未能找到 %s 元素" % (self, self.element_name))
-            raise e
+        self.logger.info("clear text on element {} on page".format(self.element_name, self.page_name))
+        self.find_element(self.locator).clear()
 
-    # 重新封装输入方法
     def send_keys(self, value, clear_first=False, click_first=False):
-        try:
-            if click_first:
-                self.click()
-            if clear_first:
-                self.clear()
-            self.logger.info("set {} into {}".format(value, self.element_name))
-            self.root.send_keys(value)
-        except AttributeError as e:
-            self.logger.error("%s 页面未能找到 %s 元素" % (self, self.element_name))
-            raise e
+        if click_first:
+            self.click()
+        if clear_first:
+            self.clear()
+        self.logger.info("set {} into element {} on page".format(value, self.element_name, self.page_name))
+        self.find_element(self.locator).send_keys(value)
 
-    # 重新封装按钮点击方法
     def click(self):
-        try:
-            self.logger.info("Click element {}".format(self.element_name))
-            self.__root.click()
-        except AttributeError as e:
-            self.logger.error("%s 页面未能找到 %s 按钮" % (self, self.element_name))
-            raise e
+        self.logger.info("Click element {} on page {}".format(self.element_name, self.page_name))
+        self.find_element(self.locator).click()
 
     def text(self):
+        self.logger.info("get text of element {} on page {}".format(self.element_name, self.page_name))
+        text = self.find_element(self.locator).text
+        self.logger.info("element {} text is: {} on page".format(self.element_name, text, self.page_name))
+        return text
+
+    def is_visible(self, default_time=10):
         try:
-            self.logger.info("get element {} text".format(self.element_name))
-            text = self.__root.text
-            self.logger.info("get element {} text: {}".format(self.element_name, text))
-            return text
-        except AttributeError as e:
-            self.logger.error("%s 页面未能找到 %s 文本" % (self, self.element_name))
-            raise e
+            WebDriverWait(self.__driver, default_time).until(
+                ec.visibility_of_element_located(self.locator)
+            )
+            self.logger.info(
+                "to check element {} on page {} visible: {}".format(self.element_name, self.page_name, True)
+            )
+            return True
+        except TimeoutException:
+            self.logger.info(
+                "to check element {} on page {} visible: {}".format(self.element_name, self.page_name, False)
+            )
+            return False
+
+    def to_disappear(self, default_time=45):
+        try:
+            WebDriverWait(self.__driver, default_time).until_not(
+                ec.visibility_of_element_located(self.locator)
+            )
+            self.logger.info(
+                "to check element {} on page {} disappear: {}".format(self.element_name, self.page_name, True)
+            )
+        except TimeoutException:
+            self.logger.info(
+                "to check element {} on page {} disappear: {}".format(self.element_name, self.page_name, False)
+            )

@@ -1,10 +1,8 @@
 import logging
 
 from appium.webdriver.webelement import WebElement
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
-
 from common import globalvariable
 from common.basepageobject import BasePageObject
 
@@ -16,50 +14,34 @@ class Utils:
         return logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
 
     @classmethod
-    def find_wait_for_present(cls, element_name, page_object_class, search_context, locator=None, default_time=30):
-        driver = search_context
-        search_locator = locator
-        cls.logger().info("find_wait_for_present {}".format(element_name))
-        try:
-            if not locator:
-                search_locator = page_object_class.LOCATOR
-            web_element = WebDriverWait(driver, default_time).until(
-                ec.presence_of_element_located(search_locator))
-            return page_object_class(web_element, element_name)
-        except Exception as e:
-            raise e
+    def find(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
+        obj = page_object_class(locator, element_name, page_name, search_context, default_time)
+        if isinstance(obj, BasePageObject):
+            return obj
 
     @classmethod
-    def find_wait_for_visible(cls, element_name, page_object_class, search_context, locator=None, default_time=30):
-        driver = search_context
-        search_locator = locator
-        cls.logger().info("find_wait_for_visible {}".format(element_name))
-        try:
-            if not locator:
-                search_locator = page_object_class.LOCATOR
-            web_element = WebDriverWait(driver, default_time).until(
-                ec.visibility_of_element_located(search_locator))
-            return page_object_class(web_element, element_name)
-        except Exception as e:
-            cls.logger().error("failed to locate {}".format(element_name))
-            raise e
+    def find_visible(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
+        cls.logger().info("find_wait_for_visible {} on page {}, locator".format(element_name, page_name, locator))
+        obj = page_object_class(locator, element_name, page_name, search_context, default_time)
+        obj.find_element()
+        if isinstance(obj, BasePageObject):
+            return obj
 
     @classmethod
-    def wait_for_disappear(cls, element_name, appium_driver, element_obj, default_time=30):
-        element = None
+    def find_present(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
+        cls.logger().info("find_wait_for_visible {} on page {}, locator".format(element_name, page_name, locator))
+        obj = page_object_class(locator, element_name, page_name, search_context, default_time)
+        obj.find_element(False)
+        if isinstance(obj, BasePageObject):
+            return obj
+
+    @classmethod
+    def wait_disappear(cls, element_obj, appium_driver, default_time=30):
         if isinstance(element_obj, BasePageObject):
-            element = element_obj.root
+            element_obj.to_disappear()
 
         if isinstance(element_obj, WebElement):
-            element = element_obj
-        cls.logger().info("wait_for_disappear {}".format(element_name))
-        return WebDriverWait(appium_driver, default_time).until_not(ec.visibility_of(element))
-
-    @classmethod
-    def is_visible(cls, element_name, page_object_class, search_context, locator=None, default_time=10):
-        try:
-            cls.find_wait_for_visible(element_name, page_object_class, search_context, locator, default_time)
-            return True
-        except TimeoutException:
-            logging.info("{} is not visible".format(element_name))
-            return False
+            cls.logger().info("wait_for_disappear {}".format(
+                element_obj.text if element_obj.text != "" else element_obj.tag_name)
+            )
+            WebDriverWait(appium_driver, default_time).until_not(ec.visibility_of(element_obj))
