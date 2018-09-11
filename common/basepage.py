@@ -13,7 +13,7 @@ PATH = lambda path: os.path.abspath(
 )
 
 
-class BasePage:
+class BasePage(object):
     def __init__(self, appium_driver):
         self.__driver = appium_driver
         self.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))

@@ -7,7 +7,7 @@ from common import globalvariable
 from selenium.common.exceptions import TimeoutException
 
 
-class BasePageObject:
+class BasePageObject(object):
 
     # LOCATOR = (MobileBy.XPATH, "//button")
 

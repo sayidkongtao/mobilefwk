@@ -34,9 +34,10 @@ class CommonUnittest(unittest.TestCase):
         self.logger.info("start to test: {}".format(self._testMethodName))
 
     def tearDown(self):
-        result = self.defaultTestResult()
-        self._feedErrorsToResult(result, self._outcome.errors)
-        self.logger.info("Result of test case: {} is : {}".format(self._testMethodName, result.wasSuccessful()))
+        pass
+        # result = self.defaultTestResult()
+        # self._feedErrorsToResult(result, self._outcome.errors)
+        # self.logger.info("Result of test case: {} is : {}".format(self._testMethodName, result.wasSuccessful()))
 
     @classmethod
     def tearDownClass(cls):

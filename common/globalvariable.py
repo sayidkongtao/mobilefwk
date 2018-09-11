@@ -4,8 +4,11 @@ __author__ = 'Tao Kong'
 import logging
 import os
 import time
-
 from common.customlog import CustomLog
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 # Basic Path ---------------------------------------------------------------
 PATH = lambda p: os.path.abspath(

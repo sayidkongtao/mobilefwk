@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 import unittest
-import warnings
-
 from common.commonnittest import CommonUnittest
 
 
@@ -10,7 +8,6 @@ class Demo(CommonUnittest):
 
     @classmethod
     def setUpClass(cls):
-        warnings.simplefilter('ignore', ResourceWarning)
         cls.setUpBeforeClass()
 
     def setUp(self):
