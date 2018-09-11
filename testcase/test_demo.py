@@ -34,10 +34,6 @@ class Demo(CommonUnittest):
         first_receiver = self.android_pages.writeemailpage.first_receiver.text()
         self.assertTrue(context["name"], first_receiver)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-
 
 def suite():
     test_suite = unittest.TestSuite()

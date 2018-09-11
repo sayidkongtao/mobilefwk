@@ -30,6 +30,18 @@ class CommonUnittest(unittest.TestCase):
         "chromedriverChromeMappingFile": r"C:\Users\Administrator\Desktop\testForAppium\mapping.json"
     }
 
+    def setUp(self):
+        self.logger.info("start to test: {}".format(self._testMethodName))
+
+    def tearDown(self):
+        result = self.defaultTestResult()
+        self._feedErrorsToResult(result, self._outcome.errors)
+        self.logger.info("Result of test case: {} is : {}".format(self._testMethodName, result.wasSuccessful()))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+
     @classmethod
     def setUpBeforeClass(cls):
         cls.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", cls.desired_caps)
