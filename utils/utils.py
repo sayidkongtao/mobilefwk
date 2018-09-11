@@ -21,7 +21,7 @@ class Utils:
 
     @classmethod
     def find_visible(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
-        cls.logger().info("find_wait_for_visible {} on page {}, locator".format(element_name, page_name, locator))
+        cls.logger().info("find_wait_for_visible {} on page {}, locator: {}".format(element_name, page_name, locator))
         obj = page_object_class(locator, element_name, page_name, search_context, default_time)
         obj.find_element()
         if isinstance(obj, BasePageObject):
@@ -29,7 +29,7 @@ class Utils:
 
     @classmethod
     def find_present(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
-        cls.logger().info("find_wait_for_visible {} on page {}, locator".format(element_name, page_name, locator))
+        cls.logger().info("find_wait_for_visible {} on page {}, locator: {}".format(element_name, page_name, locator))
         obj = page_object_class(locator, element_name, page_name, search_context, default_time)
         obj.find_element(False)
         if isinstance(obj, BasePageObject):

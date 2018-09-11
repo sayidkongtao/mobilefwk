@@ -21,7 +21,7 @@ class Demo(CommonUnittest):
         self.android_pages.accountdomainselectpage.goto_login()
         self.android_pages.loginpage.goto_message_list()
         self.android_pages.messagelistpage.check_update()
-        login_success = self.android_pages.messagelistpage.is_write_email_button_visible
+        login_success = self.android_pages.messagelistpage.at_message_list_page()
         self.assertTrue(login_success)
         self.android_pages.messagelistpage.wait_for_page_fresh()
 
@@ -42,7 +42,7 @@ class Demo(CommonUnittest):
 
 def suite():
     test_suite = unittest.TestSuite()
-    test_suite.addTests(map(Demo, ["test_login", "test_goto_write_email_page", "test_select_contact"]))
+    test_suite.addTests(map(Demo, ["test_login_4", "test_goto_write_email_page_5", "test_select_contact_6"]))
     return test_suite
 
 

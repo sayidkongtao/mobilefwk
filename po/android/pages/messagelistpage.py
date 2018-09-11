@@ -42,6 +42,9 @@ class MessageListPage(BasePage):
         )
 
 # page logic
+    def at_message_list_page(self):
+        return self.write_email_button.is_visible()
+
     def check_update(self):
         self.logger.info("check whether has version update")
         close_button = self.close_button
