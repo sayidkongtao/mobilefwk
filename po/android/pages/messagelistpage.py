@@ -13,49 +13,51 @@ class MessageListPage(BasePage):
 
     @property
     def refresh_quee_view_button(self):
-        return Utils.find_wait_for_visible("refresh_quee_view_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/refresh_quee_view"))
-
-    @property
-    def is_refresh_quee_view_button_visible(self):
-        return Utils.is_visible(
-            "refresh_quee_view_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/refresh_quee_view")
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/refresh_quee_view"),
+            "refresh_quee_view_button",
+            "MessageListPage",
+            self.driver
         )
 
     @property
     def write_email_button(self):
-        return Utils.find_wait_for_visible(
-            "write_email_button", Button, self.driver, (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[3]')
+        return Utils.find_visible(
+            Button,
+            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[3]'),
+            "write_email_button",
+            "MessageListPage",
+            self.driver
         )
-
-    @property
-    def is_write_email_button_visible(self):
-        return Utils.is_visible("write_email_button", Button, self.driver, (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[3]'))
 
     @property
     def close_button(self):
-        return Utils.find_wait_for_visible(
-            "close_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/close")
+        return Utils.find(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/close"),
+            "close_button",
+            "MessageListPage",
+            self.driver
         )
-
-    @property
-    def is_close_button_visible(self):
-        return Utils.is_visible(
-            "close_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/close")
-        )
-
 
 # page logic
     def check_update(self):
         self.logger.info("check whether has version update")
-        if self.is_close_button_visible:
+        close_button = self.close_button
+
+        if close_button.is_visible():
             self.logger.info("close version update")
-            self.close_button.click()
+            close_button.click()
         else:
             self.logger.info("no version update")
+        return self
 
     def goto_write_email_page(self):
+        self.logger.info("goto_write_email_page")
         self.write_email_button.click()
 
     def wait_for_page_fresh(self):
-        if self.is_refresh_quee_view_button_visible:
-            Utils.wait_for_disappear("refresh_quee_view_button", self.driver, self.refresh_quee_view_button)
+        refresh_quee_view_button = self.refresh_quee_view_button
+        if refresh_quee_view_button.is_visible():
+            Utils.wait_disappear(refresh_quee_view_button)

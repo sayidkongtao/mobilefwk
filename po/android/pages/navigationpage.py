@@ -7,6 +7,7 @@ from po.android.pageobjects.button import Button
 from utils.utils import Utils
 import time
 
+
 class NavigationPage(BasePage):
     def __init__(self, appium_driver):
         super(NavigationPage, self).__init__(appium_driver)
@@ -14,7 +15,13 @@ class NavigationPage(BasePage):
 # page object
     @property
     def start_button(self):
-        return Utils.find_wait_for_visible("start_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/bt_start"))
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/bt_start"),
+            "start_button",
+            "NavigationPage",
+            self.driver
+        )
 
 # page logic
     def goto_accountdomainselect(self):

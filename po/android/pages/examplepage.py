@@ -1,24 +1,30 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 
-from appium.webdriver.common.mobileby import MobileBy
 
+from appium.webdriver.common.mobileby import MobileBy
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
 from utils.utils import Utils
 
-'''
-example 页面元素 - 操作方法 -> 封装
-'''
 
-
-class ExamplePage(BasePage):
+class AccountDomainsSelectPage(BasePage):
     def __init__(self, appium_driver):
-        super(ExamplePage, self).__init__(appium_driver)
+        super(AccountDomainsSelectPage, self).__init__(appium_driver)
 
+# page object
     @property
-    def button_1(self):
-        return Utils.find_wait_for_visible("button_1", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/bt_start"))
+    def email139_button(self):
+        return Utils.find_visible(
+            Button,
+            (MobileBy.XPATH, "//android.widget.ListView/android.widget.RelativeLayout[1]"),
+            "email139_button",
+            "AccountDomainsSelectPage",
+            self.driver
+        )
 
-    def click_button_1(self):
-        self.button_1.click()
+# page logic
+
+    def goto_login(self):
+        self.logger.info("goto_login")
+        self.email139_button.click()

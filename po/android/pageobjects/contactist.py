@@ -8,16 +8,18 @@ from utils.utils import Utils
 class ContactList(BasePageObject):
     LOCATOR = (MobileBy.ID, "cn.cj.pe:id/contact_list")
 
-    def __init__(self, web_element, element_name="base"):
-        super(ContactList, self).__init__(web_element, element_name)
+    def __init__(self, locator, element_name, page_name, search_context, default_time=30):
+        super(ContactList, self).__init__(locator, element_name, page_name, search_context, default_time)
 
 # page object
     @property
     def first_contact(self):
-        return Utils.find_wait_for_visible(
-            "first_contact", ContactItem, self.root, (MobileBy.XPATH, './/android.widget.LinearLayout[@resource-id="cn.cj.pe:id/item"]')
+        return Utils.find_visible(
+            ContactItem,
+            (MobileBy.XPATH, './/android.widget.LinearLayout[@resource-id="cn.cj.pe:id/item"]'),
+            "first_contact",
+            "ContactList",
+            self.root
         )
 
 # page logic
-
-

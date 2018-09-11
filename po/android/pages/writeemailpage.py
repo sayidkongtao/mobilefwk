@@ -15,57 +15,88 @@ class WriteEmailPage(BasePage):
 
     @property
     def add_to_button(self):
-        return Utils.find_wait_for_visible(
-            "add_to_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/add_to")
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/add_to"),
+            "add_to_button",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def add_cc_button(self):
-        return Utils.find_wait_for_visible(
-            "add_cc_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/add_cc")
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/add_cc"),
+            "add_to_button",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def add_bcc_button(self):
-        return Utils.find_wait_for_visible(
-            "add_bcc_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/add_bcc")
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/add_bcc"),
+            "add_to_button",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def first_receiver(self):
-        return Utils.find_wait_for_visible(
-            "first_receiver", Text, self.driver, (MobileBy.XPATH, '//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]//android.view.View//android.widget.TextView')
+        return Utils.find_visible(
+            Text,
+            (MobileBy.XPATH, '//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]\
+            //android.view.View//android.widget.TextView'),
+            "first_receiver",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def warning_message(self):
-        return Utils.find_wait_for_visible(
-            "warning_message", Text, self.driver, (MobileBy.ID, 'cn.cj.pe:id/message')
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/message'),
+            "warning_message",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def send_direct_button(self):
-        return Utils.find_wait_for_visible(
-            "send_direct_button", Button, self.driver, (MobileBy.ID, 'cn.cj.pe:id/right')
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, 'cn.cj.pe:id/right'),
+            "send_direct_button",
+            "WriteEmailPage",
+            self.driver
         )
 
     @property
     def send_success_img(self):
-        return Utils.find_wait_for_visible(
-            "send_success_img", Text, self.driver, (MobileBy.ID, 'cn.cj.pe:id/gif_success_img')
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/gif_success_img'),
+            "send_success_img",
+            "SendEmailPageResult_WriteEmailPage",
+            self.driver
         )
 
     @property
     def back_to_email_button(self):
-        return Utils.find_wait_for_visible(
-           "back_to_email_button", Button, self.driver, (MobileBy.ID, 'cn.cj.pe:id/back_to_list')
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, 'cn.cj.pe:id/back_to_list'),
+            "back_to_email_button",
+            "SendEmailPageResult_WriteEmailPage",
+            self.driver
         )
 
 # page logic
     def at_write_email_page(self):
-        return Utils.is_visible(
-            "add_to_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/add_to")
-        )
+        return self.add_to_button.is_visible()
 
     def goto_select_contact_page(self):
         self.logger.info("goto_select_contact_page")

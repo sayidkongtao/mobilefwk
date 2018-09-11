@@ -36,7 +36,7 @@ class Utils:
             return obj
 
     @classmethod
-    def wait_disappear(cls, element_obj, appium_driver, default_time=30):
+    def wait_disappear(cls, element_obj, appium_driver=None, default_time=30):
         if isinstance(element_obj, BasePageObject):
             element_obj.to_disappear()
 

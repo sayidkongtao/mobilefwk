@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+__author__ = 'Tao Kong'
+
+
 from appium.webdriver.common.mobileby import MobileBy
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
@@ -11,8 +15,12 @@ class AccountDomainsSelectPage(BasePage):
 # page object
     @property
     def email139_button(self):
-        return Utils.find_wait_for_visible(
-            "email139_button", Button, self.driver, (MobileBy.XPATH, "//android.widget.ListView/android.widget.RelativeLayout[1]")
+        return Utils.find_visible(
+            Button,
+            (MobileBy.XPATH, "//android.widget.ListView/android.widget.RelativeLayout[1]"),
+            "email139_button",
+            "AccountDomainsSelectPage",
+            self.driver
         )
 
 # page logic
@@ -20,5 +28,3 @@ class AccountDomainsSelectPage(BasePage):
     def goto_login(self):
         self.logger.info("goto_login")
         self.email139_button.click()
-
-

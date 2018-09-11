@@ -15,12 +15,22 @@ class SelectContactPage(BasePage):
 
     @property
     def confirm_button(self):
-        return Utils.find_wait_for_visible("confirm_button", Button, self.driver, (MobileBy.ID, "cn.cj.pe:id/headicon_text"))
+        return Utils.find_visible(
+            Button,
+            (MobileBy.ID, "cn.cj.pe:id/headicon_text"),
+            "confirm_button",
+            "SelectContactPage",
+            self.driver
+        )
 
     @property
     def contact_list(self):
-        return Utils.find_wait_for_visible(
-            "contact_list", ContactList, self.driver, (MobileBy.ID, "cn.cj.pe:id/contact_list")
+        return Utils.find_visible(
+            ContactList,
+            (MobileBy.ID, "cn.cj.pe:id/contact_list"),
+            "contact_list",
+            "SelectContactPage",
+            self.driver
         )
 
 # page Logic
