@@ -37,6 +37,30 @@ class WriteEmailPage(BasePage):
             "first_receiver", Text, self.driver, (MobileBy.XPATH, '//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]//android.view.View//android.widget.TextView')
         )
 
+    @property
+    def warning_message(self):
+        return Utils.find_wait_for_visible(
+            "warning_message", Text, self.driver, (MobileBy.ID, 'cn.cj.pe:id/message')
+        )
+
+    @property
+    def send_direct_button(self):
+        return Utils.find_wait_for_visible(
+            "send_direct_button", Button, self.driver, (MobileBy.ID, 'cn.cj.pe:id/right')
+        )
+
+    @property
+    def send_success_img(self):
+        return Utils.find_wait_for_visible(
+            "send_success_img", Text, self.driver, (MobileBy.ID, 'cn.cj.pe:id/gif_success_img')
+        )
+
+    @property
+    def back_to_email_button(self):
+        return Utils.find_wait_for_visible(
+           "back_to_email_button", Button, self.driver, (MobileBy.ID, 'cn.cj.pe:id/back_to_list')
+        )
+
 # page logic
     def at_write_email_page(self):
         return Utils.is_visible(

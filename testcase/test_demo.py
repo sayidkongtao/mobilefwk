@@ -16,7 +16,7 @@ class Demo(CommonUnittest):
     def setUp(self):
         self.logger.info("start to test: {}".format(self._testMethodName))
 
-    def test_login(self):
+    def test_login_4(self):
         self.android_pages.navigationpage.goto_accountdomainselect()
         self.android_pages.accountdomainselectpage.goto_login()
         self.android_pages.loginpage.goto_message_list()
@@ -25,11 +25,11 @@ class Demo(CommonUnittest):
         self.assertTrue(login_success)
         self.android_pages.messagelistpage.wait_for_page_fresh()
 
-    def test_goto_write_email_page(self):
+    def test_goto_write_email_page_5(self):
         self.android_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.android_pages.writeemailpage.at_write_email_page())
 
-    def test_select_contact(self):
+    def test_select_contact_6(self):
         self.android_pages.writeemailpage.goto_select_contact_page()
         context = self.android_pages.selectcontactpage.select_first_contact()
         first_receiver = self.android_pages.writeemailpage.first_receiver.text()
