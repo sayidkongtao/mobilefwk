@@ -24,13 +24,13 @@ class NavigationPage(BasePage):
         )
 
 # page logic
-    def at_page(self):
+    def at(self):
         self.logger.info("Wait for page: NavigationPage")
         Utils.wait_until_condition(lambda: self.driver.current_activity == "com.mail139.about.GuiderPagerActivity")
 
     def goto_accountdomainselect(self):
         self.logger.info("goto_accountdomainselect")
-        self.at_page()
+        self.at()
         self.swipe_left()
         self.swipe_left()
         self.start_button.click()

@@ -42,7 +42,7 @@ class MessageListPage(BasePage):
         )
 
 # page logic
-    def at_message_list_page(self):
+    def at(self):
         self.logger.info("Wait for page MessageListPage")
         Utils.wait_until_condition(lambda: self.driver.current_activity == ".activity.MessageList")
         return True

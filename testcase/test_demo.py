@@ -18,13 +18,13 @@ class Demo(CommonUnittest):
         self.android_pages.navigationpage.goto_accountdomainselect()
         self.android_pages.accountdomainselectpage.goto_login()
         self.android_pages.loginpage.goto_message_list()
-        self.assertTrue(self.android_pages.messagelistpage.at_message_list_page())
+        self.assertTrue(self.android_pages.messagelistpage.at())
         self.android_pages.messagelistpage.check_update()
         self.android_pages.messagelistpage.wait_for_page_fresh()
 
     def test_goto_write_email_page_5(self):
         self.android_pages.messagelistpage.goto_write_email_page()
-        self.assertTrue(self.android_pages.writeemailpage.at_write_email_page())
+        self.assertTrue(self.android_pages.writeemailpage.at())
 
     def test_select_contact_6(self):
         self.android_pages.writeemailpage.goto_select_contact_page()
@@ -35,7 +35,7 @@ class Demo(CommonUnittest):
 
     def test_select_specific_contact_7(self):
         self.android_pages.messagelistpage.goto_write_email_page()
-        self.assertTrue(self.android_pages.writeemailpage.at_write_email_page())
+        self.assertTrue(self.android_pages.writeemailpage.at())
         self.android_pages.writeemailpage.goto_select_contact_page()
         context = self.android_pages.selectcontactpage.search_then_select("Postmaster")
         first_receiver = self.android_pages.writeemailpage.first_receiver.text()

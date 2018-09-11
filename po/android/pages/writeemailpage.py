@@ -145,7 +145,7 @@ class WriteEmailPage(BasePage):
         )
 
 # page logic
-    def at_write_email_page(self):
+    def at(self):
         return self.add_to_button.is_visible()
 
     def goto_select_contact_page(self):
