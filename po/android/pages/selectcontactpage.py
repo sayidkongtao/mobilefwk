@@ -5,6 +5,7 @@ from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
+from po.android.pageobjects.input import Input
 from utils.utils import Utils
 from po.android.pageobjects.contactist import ContactList
 
@@ -14,11 +15,21 @@ class SelectContactPage(BasePage):
         super(SelectContactPage, self).__init__(appium_driver)
 
     @property
+    def search_input(self):
+        return Utils.find_visible(
+            Input,
+            (MobileBy.ID, "cn.cj.pe:id/search"),
+            "search_input",
+            "SelectContactPage",
+            self.driver
+        )
+
+    @property
     def confirm_button(self):
         return Utils.find_visible(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/headicon_text"),
-            "confirm_button",
+            "确定",
             "SelectContactPage",
             self.driver
         )
@@ -44,3 +55,7 @@ class SelectContactPage(BasePage):
         }
         self.confirm_button.click()
         return context
+
+    def search_then_select(self, value):
+        self.search_input.send_keys(value)
+        return self.select_first_contact()

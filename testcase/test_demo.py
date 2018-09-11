@@ -2,6 +2,7 @@
 __author__ = 'Tao Kong'
 import unittest
 from common.commonnittest import CommonUnittest
+from po.android.helper import giveupemailhelper
 
 
 class Demo(CommonUnittest):
@@ -30,11 +31,30 @@ class Demo(CommonUnittest):
         context = self.android_pages.selectcontactpage.select_first_contact()
         first_receiver = self.android_pages.writeemailpage.first_receiver.text()
         self.assertTrue(context["name"], first_receiver)
+        giveupemailhelper.give_up(self.driver)
+
+    def test_select_specific_contact_7(self):
+        self.android_pages.messagelistpage.goto_write_email_page()
+        self.assertTrue(self.android_pages.writeemailpage.at_write_email_page())
+        self.android_pages.writeemailpage.goto_select_contact_page()
+        context = self.android_pages.selectcontactpage.search_then_select("Postmaster")
+        first_receiver = self.android_pages.writeemailpage.first_receiver.text()
+        self.assertTrue(context["name"], first_receiver)
+        giveupemailhelper.give_up(self.driver)
 
 
 def suite():
     test_suite = unittest.TestSuite()
-    test_suite.addTests(map(Demo, ["test_login_4", "test_goto_write_email_page_5", "test_select_contact_6"]))
+    test_suite.addTests(
+        map(
+            Demo,
+            ["test_login_4",
+             "test_goto_write_email_page_5",
+             "test_select_contact_6",
+             "test_select_specific_contact_7"
+             ]
+        )
+    )
     return test_suite
 
 

@@ -54,8 +54,9 @@ class MessageListPage(BasePage):
         if close_button.is_visible():
             self.logger.info("close version update")
             close_button.click()
+            self.check_update()
         else:
-            self.logger.info("no version update")
+            self.logger.info("no version update info displayed")
         return self
 
     def goto_write_email_page(self):
