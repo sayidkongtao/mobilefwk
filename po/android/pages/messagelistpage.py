@@ -2,10 +2,11 @@
 __author__ = 'Tao Kong'
 
 from appium.webdriver.common.mobileby import MobileBy
+
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
-from utils.utils import Utils
 from po.android.pageobjects.text import Text
+from utils.utils import Utils
 
 
 class MessageListPage(BasePage):
@@ -83,6 +84,68 @@ class MessageListPage(BasePage):
             self.driver
         )
 
+    @property
+    def draft_email(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.XPATH, '//android.widget.TextView[@text="草稿箱"]'),
+            "已发送",
+            "MessageListPage",
+            self.driver
+        )
+
+    # email list
+    @property
+    def first_email_subject(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.XPATH, '//android.widget.TextView[@resource-id="cn.cj.pe:id/mail_subject"]'),
+            "第一个邮件主题",
+            "MessageListPage",
+            self.driver
+        )
+
+    # bottom bar
+    @property
+    def email_bar(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_email'),
+            "邮件",
+            "MessageListPage",
+            self.driver
+        )
+
+    @property
+    def contact_bar(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_contacts'),
+            "联系人",
+            "MessageListPage",
+            self.driver
+        )
+
+    @property
+    def find_bar(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_find'),
+            "发现",
+            "MessageListPage",
+            self.driver
+        )
+
+    @property
+    def mine_bar(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_mine'),
+            "我的",
+            "MessageListPage",
+            self.driver
+        )
+
 # page logic
     def at(self):
         self.logger.info("Wait for page MessageListPage")
@@ -104,6 +167,18 @@ class MessageListPage(BasePage):
     def goto_write_email_page(self):
         self.logger.info("goto_write_email_page")
         self.write_email_button.click()
+
+    def goto_sent_page(self):
+        self.more_button.click()
+        self.sent_email.click()
+        Utils.wait_until_condition(lambda: self.title.text() == "已发送")
+        self.wait_for_page_fresh()
+
+    def goto_draft_page(self):
+        self.more_button.click()
+        self.draft_email.click()
+        Utils.wait_until_condition(lambda: self.title.text() == "草稿箱")
+        self.wait_for_page_fresh()
 
     def wait_for_page_fresh(self):
         refresh_quee_view_button = self.refresh_quee_view_button

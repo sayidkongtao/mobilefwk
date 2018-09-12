@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/env27" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv27" />
     </content>
     <orderEntry type="jdk" jdkName="Python 2.7 (mobilefwk)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

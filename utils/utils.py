@@ -66,3 +66,7 @@ class Utils:
             if time.time() > end_time:
                 break
         raise Exception("Timeout to wait for condition")
+
+    @classmethod
+    def now(cls):
+        return time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))

@@ -27,7 +27,8 @@ class CommonUnittest(unittest.TestCase):
         "unicodeKeyboard": "true",
         "resetKeyboard": "true",
         "chromedriverExecutableDir": r"C:\Users\Administrator\Desktop\testForAppium\chrome_driver",
-        "chromedriverChromeMappingFile": r"C:\Users\Administrator\Desktop\testForAppium\mapping.json"
+        "chromedriverChromeMappingFile": r"C:\Users\Administrator\Desktop\testForAppium\mapping.json",
+        "noReset": True
     }
 
     def setUp(self):
