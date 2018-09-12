@@ -129,3 +129,9 @@ class BasePage(object):
         # print os.getcwd()
         image = self.driver.save_screenshot(self.save_png_name(name))
         return image
+
+    def launch_app(self):
+        self.driver.launch_app()
+
+    def reset(self):
+        self.driver.reset()

@@ -17,3 +17,6 @@ def save_email_to_draft(appium_driver):
     write_page.save_email_to_draft()
     MessageListPage(appium_driver).at()
     MessageListPage(appium_driver).wait_for_page_fresh()
+
+
+
