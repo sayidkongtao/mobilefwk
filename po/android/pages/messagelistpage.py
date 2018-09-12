@@ -5,11 +5,22 @@ from appium.webdriver.common.mobileby import MobileBy
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
 from utils.utils import Utils
+from po.android.pageobjects.text import Text
 
 
 class MessageListPage(BasePage):
     def __init__(self, appium_driver):
         super(MessageListPage, self).__init__(appium_driver)
+
+    @property
+    def title(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/actionbar_sub_title'),
+            "title",
+            "MessageListPage",
+            self.driver
+        )
 
     @property
     def refresh_quee_view_button(self):
@@ -36,7 +47,38 @@ class MessageListPage(BasePage):
         return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/close"),
-            "close_button",
+            "close_button for update",
+            "MessageListPage",
+            self.driver
+        )
+
+# left menu
+    @property
+    def more_button(self):
+        return Utils.find_visible(
+            Button,
+            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[1]'),
+            'more_menu',
+            "MessageListPage",
+            self.driver
+        )
+
+    @property
+    def folder(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.ID, 'cn.cj.pe:id/menu_item_other_text'),
+            "文件夹",
+            "MessageListPage",
+            self.driver
+        )
+
+    @property
+    def sent_email(self):
+        return Utils.find_visible(
+            Text,
+            (MobileBy.XPATH, '//android.widget.TextView[@text="已发送"]'),
+            "已发送",
             "MessageListPage",
             self.driver
         )
