@@ -5,6 +5,13 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from common import globalvariable
 from selenium.common.exceptions import TimeoutException
+from appium.webdriver.webelement import WebElement
+import os
+import time
+
+PATH = lambda p: os.path.abspath(
+    os.path.join(os.path.dirname(__file__), p)
+)
 
 
 class BasePageObject(object):
@@ -24,6 +31,8 @@ class BasePageObject(object):
         return self.find_element(self.locator)
 
     def find_element(self, visible=True):
+        result = "pass"
+        capture_driver = self.__driver
         try:
             if visible:
                 return WebDriverWait(self.__driver, self.default_time).until(
@@ -37,7 +46,32 @@ class BasePageObject(object):
             self.logger.error(
                 "on {} cannot find element: {}, locator: {}".format(self.page_name, self.element_name, self.locator)
             )
+            result = "failed"
             raise e
+
+        finally:
+            if isinstance(self.__driver, WebElement):
+                capture_driver = self.__driver.parent
+            folder = globalvariable.get_value("test_method", "unknown")
+            try:
+                today_result = globalvariable.get_value("TODAY_RESULT")
+                screenshot_path = os.path.join(today_result,
+                                               "screenshot" + globalvariable.get_value("PROJECT_START_DAY"),
+                                               folder
+                                               )
+                if not os.path.exists(screenshot_path):
+                    os.mkdir(screenshot_path)
+                capture_driver.save_screenshot(
+                    os.path.join(
+                        screenshot_path,
+                        self.page_name + time.strftime('%Y-%m-%d', time.localtime(time.time())) + result
+                    )
+                )
+            except Exception as e:
+                print e
+            finally:
+                print "failed to capture the screenshot"
+                folder = "unknown"
 
     def find_elements(self, visible=True):
         try:

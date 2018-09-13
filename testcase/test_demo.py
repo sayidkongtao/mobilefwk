@@ -6,6 +6,8 @@ from common.commonnittest import CommonUnittest
 from po.android.helper import giveupemailhelper
 from utils.utils import Utils
 from po.android.helper.messagelistpagehelper import MessageListHelper
+from common import globalvariable
+
 
 class Demo(CommonUnittest):
 
@@ -15,6 +17,7 @@ class Demo(CommonUnittest):
 
     def setUp(self):
         self.logger.info("start to test: {}".format(self._testMethodName))
+        globalvariable.set_value("test_method", self._testMethodName)
 
     def login_4(self):
         MessageListHelper.login(self.android_pages)
