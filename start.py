@@ -12,7 +12,7 @@ from testcase import test_demo
 
 if __name__ == "__main__":
     # desired_caps
-    desired_caps = {
+    desired_caps_loc = {
         "platformName": "Android",
         "PlatformVersion": "6.0",
         "deviceName": "HC43YWW01974",
@@ -25,8 +25,21 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
+    desired_caps = {
+        "platformName": os.getenv('APPIUM_PLATFORM'),
+        "PlatformVersion": os.getenv('APPIUM_DEVICE_VERSION'),
+        "deviceName": os.getenv('APPIUM_DEVICE_NAME'),
+        "appPackage": os.getenv('APPIUM_APP_PACKAGE'),
+        "appActivity": os.getenv('APPIUM_APP_ACTIVITY'),
+        "app": os.getenv('APPIUM_APP_FILE'),
+        "newCommandTimeout": os.getenv('APPIUM_NEW_COMMAND_TIMEOUT'),
+        "unicodeKeyboard": "true",
+        "resetKeyboard": "true",
+        "noReset": True
+    }
+
+    driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
+    # driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
@@ -38,4 +51,4 @@ if __name__ == "__main__":
 
     with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description=desc)
-    runner.run(suite)
+        runner.run(suite)
