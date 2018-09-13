@@ -4,24 +4,39 @@ __author__ = 'Tao Kong'
 import os
 import unittest
 
-# Basic Path ---------------------------------------------------------------
-PATH = lambda p: os.path.abspath(
-    os.path.join(os.path.dirname(__file__), p)
-)
+from appium import webdriver
 
+from common import globalvariable
+from public.HTMLTestRunner import HTMLTestRunner
+from testcase import test_demo
 
-def create_suite():
-    # 定义单元测试容器
-    test_suites = unittest.TestSuite()
+if __name__ == "__main__":
+    # desired_caps
+    desired_caps = {
+        "platformName": "Android",
+        "PlatformVersion": "6.0",
+        "deviceName": "HC43YWW01974",
+        "appPackage": "cn.cj.pe",
+        "appActivity": "com.mail139.about.LaunchActivity",
+        "unicodeKeyboard": "true",
+        "resetKeyboard": "true",
+        "unicodeKeyboard": "true",
+        "resetKeyboard": "true",
+        "noReset": True
+    }
 
-    # 定搜索用例文件的方法
-    discover = unittest.defaultTestLoader.discover(PATH("testcase"), pattern='test_*.py', top_level_dir=None)
+    # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
+    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
 
-    # 将测试用例加入测试容器中
-    for test_suite in discover:
-        for case_name in test_suite:
-            test_suites.addTest(case_name)
-    return test_suites
+    globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
+    globalvariable.set_value("APPIUM_DRIVER", driver)
+    runner = unittest.TextTestRunner(verbosity=2)
+    suite = unittest.TestSuite()
+    suite.addTests(test_demo.suite())
+    report_file = os.path.join(globalvariable.get_value("TODAY_RESULT"), "Report.html")
+    report_title = "Demo"
+    desc = "Demo For Test"
 
-
-test_case = create_suite()
+    with open(report_file, 'wb') as report:
+        runner = HTMLTestRunner(stream=report, title=report_title, description=desc)
+        runner.run(suite)
