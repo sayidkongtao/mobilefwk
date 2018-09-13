@@ -186,5 +186,5 @@ class MessageListPage(BasePage):
 
     def wait_for_page_fresh(self):
         refresh_quee_view_button = self.refresh_quee_view_button
-        if refresh_quee_view_button.is_visible(3):
+        if refresh_quee_view_button.is_visible(6):
             Utils.wait_disappear(refresh_quee_view_button)
