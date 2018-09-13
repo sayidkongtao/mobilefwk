@@ -30,7 +30,6 @@ if __name__ == "__main__":
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
-    runner = unittest.TextTestRunner(verbosity=2)
     suite = unittest.TestSuite()
     suite.addTests(test_demo.suite())
     report_file = os.path.join(globalvariable.get_value("TODAY_RESULT"), "Report.html")
@@ -39,4 +38,4 @@ if __name__ == "__main__":
 
     with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description=desc)
-        runner.run(suite)
+    runner.run(suite)

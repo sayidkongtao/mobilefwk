@@ -30,7 +30,7 @@ class CommonUnittest(unittest.TestCase):
 
     @classmethod
     def setUpBeforeClass(cls):
-        globalvariable.init(cls.desired_caps.get("deviceName", cls.desired_caps.get("PLATFORMNAME", "default_android")))
+        # globalvariable.init(cls.desired_caps.get("deviceName", cls.desired_caps.get("PLATFORMNAME", "default_android")))
         cls.driver = globalvariable.get_value("APPIUM_DRIVER")
         cls.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
         cls.android_pages = AndroidPages(cls.driver)
