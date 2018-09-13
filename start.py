@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import os
 import unittest
-
 from appium import webdriver
-
 from common import globalvariable
 from public.HTMLTestRunner import HTMLTestRunner
 from testcase import test_demo
@@ -38,8 +41,8 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    # driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
+    # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
+    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
