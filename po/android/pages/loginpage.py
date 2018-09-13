@@ -2,10 +2,11 @@
 __author__ = 'Tao Kong'
 
 from appium.webdriver.common.mobileby import MobileBy
+
 from common.basepage import BasePage
+from po.android.pageobjects.button import Button
 from po.android.pageobjects.input import Input
 from utils.utils import Utils
-from po.android.pageobjects.button import Button
 
 
 class LoginPage(BasePage):
@@ -15,7 +16,7 @@ class LoginPage(BasePage):
 # page object
     @property
     def account_input(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.XPATH,
              '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_number"]//android.widget.EditText'),
@@ -26,7 +27,7 @@ class LoginPage(BasePage):
 
     @property
     def passwd_input(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.XPATH,
              '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_password"]//android.widget.EditText'),
@@ -37,7 +38,7 @@ class LoginPage(BasePage):
 
     @property
     def login_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/login"),
             "login_button",

@@ -15,7 +15,7 @@ class MessageListPage(BasePage):
 
     @property
     def title(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/actionbar_sub_title'),
             "title",
@@ -35,7 +35,7 @@ class MessageListPage(BasePage):
 
     @property
     def write_email_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[3]'),
             "write_email_button",
@@ -56,7 +56,7 @@ class MessageListPage(BasePage):
 # left menu
     @property
     def more_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[1]'),
             'more_menu',
@@ -66,7 +66,7 @@ class MessageListPage(BasePage):
 
     @property
     def folder(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/menu_item_other_text'),
             "文件夹",
@@ -76,7 +76,7 @@ class MessageListPage(BasePage):
 
     @property
     def sent_email(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.TextView[@text="已发送"]'),
             "已发送",
@@ -86,7 +86,7 @@ class MessageListPage(BasePage):
 
     @property
     def draft_email(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.TextView[@text="草稿箱"]'),
             "已发送",
@@ -97,7 +97,7 @@ class MessageListPage(BasePage):
     # email list
     @property
     def first_email_subject(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.TextView[@resource-id="cn.cj.pe:id/mail_subject"]'),
             "第一个邮件主题",
@@ -108,7 +108,7 @@ class MessageListPage(BasePage):
     # bottom bar
     @property
     def email_bar(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_email'),
             "邮件",
@@ -118,7 +118,7 @@ class MessageListPage(BasePage):
 
     @property
     def contact_bar(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_contacts'),
             "联系人",
@@ -128,7 +128,7 @@ class MessageListPage(BasePage):
 
     @property
     def find_bar(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_find'),
             "发现",
@@ -138,7 +138,7 @@ class MessageListPage(BasePage):
 
     @property
     def mine_bar(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_mine'),
             "我的",
@@ -180,6 +180,11 @@ class MessageListPage(BasePage):
         Utils.wait_until_condition(lambda: self.title.text() == "草稿箱")
         self.wait_for_page_fresh()
 
+    def goto_contact_list_page(self):
+        self.logger.info("goto_contact_list_page")
+        self.contact_bar.click()
+
     def wait_for_page_fresh(self):
         refresh_quee_view_button = self.refresh_quee_view_button
-        Utils.wait_disappear(refresh_quee_view_button)
+        if refresh_quee_view_button.is_visible(3):
+            Utils.wait_disappear(refresh_quee_view_button)

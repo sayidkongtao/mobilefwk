@@ -17,7 +17,7 @@ class SelectContactPage(BasePage):
 
     @property
     def search_input(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.ID, "cn.cj.pe:id/search"),
             "search_input",
@@ -27,7 +27,7 @@ class SelectContactPage(BasePage):
 
     @property
     def confirm_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/headicon_text"),
             "确定",
@@ -37,7 +37,7 @@ class SelectContactPage(BasePage):
 
     @property
     def contact_list(self):
-        return Utils.find_visible(
+        return Utils.find(
             ContactList,
             (MobileBy.ID, "cn.cj.pe:id/contact_list"),
             "contact_list",
@@ -48,7 +48,7 @@ class SelectContactPage(BasePage):
     # contact group
     @property
     def contact_group(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, 'cn.cj.pe:id/tv_contact_group'),
             "联系人分组",
@@ -58,7 +58,7 @@ class SelectContactPage(BasePage):
 
     @property
     def read_group(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.TextView[@text="读信联系人"]'),
             "读信联系人",
@@ -68,7 +68,7 @@ class SelectContactPage(BasePage):
 
     @property
     def first_person_under_selected_group(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.TextView[@resource-id="cn.cj.pe:id/name"]'),
             "First Person",

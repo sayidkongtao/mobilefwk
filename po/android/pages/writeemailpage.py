@@ -16,7 +16,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def goto_message_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/actionbar_back"),
             "<",
@@ -26,7 +26,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def send_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/txt_send"),
             "发送",
@@ -36,7 +36,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def add_to_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/add_to"),
             "add_to_button",
@@ -46,7 +46,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def add_cc_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/add_cc"),
             "add_to_button",
@@ -56,7 +56,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def add_bcc_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/add_bcc"),
             "add_to_button",
@@ -67,7 +67,7 @@ class WriteEmailPage(BasePage):
     # receive table
     @property
     def receive_label(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, "cn.cj.pe:id/to_lable"),
             "收件人",
@@ -77,7 +77,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def first_receiver(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]\
             //android.view.View//android.widget.TextView'),
@@ -88,7 +88,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def delete_receive(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/delete"),
             "移除",
@@ -99,7 +99,7 @@ class WriteEmailPage(BasePage):
     # cc table
     @property
     def cc_bcc_item(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/cc_lable'),
             "抄送/密送",
@@ -109,7 +109,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def cc_item(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]'),
             "抄送",
@@ -119,7 +119,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def first_p_under_cc_item(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.view.View//android.widget.TextView'),
             "first_p_under_cc_item",
@@ -129,7 +129,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def bcc_item(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/bcc_lable'),
             "密送",
@@ -139,7 +139,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def first_p_under_bcc_item(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//android.view.View//android.widget.TextView'),
             "first_p_under_cc_item",
@@ -149,7 +149,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def subject_input(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.ID, 'cn.cj.pe:id/subject'),
             "主题",
@@ -160,7 +160,7 @@ class WriteEmailPage(BasePage):
     # cancel table
     @property
     def cancel_email_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, 'cn.cj.pe:id/left'),
             "取消",
@@ -180,7 +180,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def save_to_draft_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, 'cn.cj.pe:id/right'),
             "保存为草稿",
@@ -190,7 +190,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def warning_message(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, 'cn.cj.pe:id/message'),
             "warning_message",
@@ -200,7 +200,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def send_direct_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, 'cn.cj.pe:id/right'),
             "send_direct_button",
@@ -211,7 +211,7 @@ class WriteEmailPage(BasePage):
     # result page
     @property
     def back_result_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.ID, "cn.cj.pe:id/hjl_headicon"),
             "<",
@@ -241,7 +241,7 @@ class WriteEmailPage(BasePage):
 
     @property
     def back_to_email_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, 'cn.cj.pe:id/back_to_list'),
             "back_to_email_button",
@@ -252,7 +252,7 @@ class WriteEmailPage(BasePage):
     # content table
     @property
     def content_input(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.ID, 'cn.cj.pe:id/message_content'),
             "正文部分",

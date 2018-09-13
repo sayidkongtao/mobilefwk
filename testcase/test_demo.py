@@ -2,11 +2,11 @@
 __author__ = 'Tao Kong'
 import unittest
 
+from common import globalvariable
 from common.commonnittest import CommonUnittest
 from po.android.helper import giveupemailhelper
-from utils.utils import Utils
 from po.android.helper.messagelistpagehelper import MessageListHelper
-from common import globalvariable
+from utils.utils import Utils
 
 
 class Demo(CommonUnittest):
@@ -123,6 +123,76 @@ class Demo(CommonUnittest):
         context = "Content" + subject
         self.android_pages.writeemailpage.send_email_failed("sayid_kttao", subject, context)
 
+    def send_email_failed_15(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_write_email_page()
+        self.assertTrue(self.android_pages.writeemailpage.at())
+        subject = Utils.now()
+        context = "Content" + subject
+        self.android_pages.writeemailpage.send_email_failed("sayid_kttao", subject, context)
+
+    def goto_contact_details_16(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_contact_list_page()
+        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        check_name = self.android_pages.contactdetailspage.name.text()
+        self.logger.info("Check: 此页面为联系人详情页面")
+        self.assertTrue(name, check_name)
+
+    def check_previous_email_17(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_contact_list_page()
+        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        check_name = self.android_pages.contactdetailspage.name.text()
+        self.logger.info("Check: 此页面为联系人详情页面")
+        self.assertTrue(name, check_name)
+        self.android_pages.contactdetailspage.goto_email_history()
+        self.android_pages.emailhistorypage.goto_email_content()
+        reuslt = self.android_pages.emailcontentpage.check_previous_button()
+        self.logger.info("Check: 切换至上一封邮件内容")
+        self.assertTrue(reuslt)
+
+    def check_next_email_18(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_contact_list_page()
+        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        check_name = self.android_pages.contactdetailspage.name.text()
+        self.logger.info("Check: 此页面为联系人详情页面")
+        self.assertTrue(name, check_name)
+        self.android_pages.contactdetailspage.goto_email_history()
+        self.android_pages.emailhistorypage.goto_email_content()
+        reuslt = self.android_pages.emailcontentpage.check_next_button()
+        self.logger.info("Check: 切换至下一封邮件内容")
+        self.assertTrue(reuslt)
+
+    def check_reply_email_19(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_contact_list_page()
+        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        check_name = self.android_pages.contactdetailspage.name.text()
+        self.logger.info("Check: 此页面为联系人详情页面")
+        self.assertTrue(name, check_name)
+        self.android_pages.contactdetailspage.goto_email_history()
+        self.android_pages.emailhistorypage.goto_email_content()
+        re, sender = self.android_pages.emailcontentpage.reply_email_success()
+        self.logger.info("Check: subject contains RE")
+        self.assertTrue(re)
+        self.logger.info("Check: sender")
+        self.assertTrue(sender)
+
+    def check_forward_email_20(self):
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
+        self.android_pages.messagelistpage.goto_contact_list_page()
+        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        check_name = self.android_pages.contactdetailspage.name.text()
+        self.logger.info("Check: 此页面为联系人详情页面")
+        self.assertTrue(name, check_name)
+        self.android_pages.contactdetailspage.goto_email_history()
+        self.android_pages.emailhistorypage.goto_email_content()
+        fwd = self.android_pages.emailcontentpage.reply_email_success()
+        self.logger.info("Check: subject contains Fwd:")
+        self.assertTrue(fwd)
+
 
 def suite():
     test_suite = unittest.TestSuite()
@@ -140,7 +210,12 @@ def suite():
                 "send_email_without_subject_11",
                 "send_email_success_12",
                 "save_email_to_draft_14",
-                "send_email_failed_15"
+                "send_email_failed_15",
+                "goto_contact_details_16",
+                "check_previous_email_17",
+                "check_next_email_18",
+                "check_reply_email_19",
+                "check_forward_email_20"
              ]
         )
     )

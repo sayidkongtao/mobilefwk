@@ -18,7 +18,7 @@ class ContactList(BasePageObject):
 # page object
     @property
     def first_contact(self):
-        return Utils.find_visible(
+        return Utils.find(
             ContactItem,
             (MobileBy.XPATH, './/android.widget.LinearLayout[@resource-id="cn.cj.pe:id/item"]'),
             "first_contact",

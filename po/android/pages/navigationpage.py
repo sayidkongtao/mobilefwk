@@ -2,10 +2,10 @@
 __author__ = 'Tao Kong'
 
 from appium.webdriver.common.mobileby import MobileBy
+
 from common.basepage import BasePage
 from po.android.pageobjects.button import Button
 from utils.utils import Utils
-import time
 
 
 class NavigationPage(BasePage):
@@ -15,7 +15,7 @@ class NavigationPage(BasePage):
 # page object
     @property
     def start_button(self):
-        return Utils.find_visible(
+        return Utils.find(
             Button,
             (MobileBy.ID, "cn.cj.pe:id/bt_start"),
             "start_button",

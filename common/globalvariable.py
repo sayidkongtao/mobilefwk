@@ -3,9 +3,11 @@ __author__ = 'Tao Kong'
 
 import logging
 import os
-import time
-from common.customlog import CustomLog
 import sys
+import time
+
+from common.customlog import CustomLog
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -17,7 +19,7 @@ PATH = lambda p: os.path.abspath(
 
 
 #  初始化
-def init(logger_name=None):
+def init(logger_name=None, platformName="default_android"):
     global _global_dict
     try:
         _global_dict
@@ -26,15 +28,17 @@ def init(logger_name=None):
         _global_dict = {}
         project_start_time = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
         project_start_day = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-        today_result = PATH(os.path.join(".." + os.sep, "result", project_start_day))
+        _global_dict["PLATFORMNAME"] = platformName
+        today_result = PATH(
+            os.path.join(".." + os.sep, "result", project_start_day, _global_dict["PLATFORMNAME"], project_start_time))
         _global_dict["PROJECT_START_TIME"] = project_start_time
         _global_dict["PROJECT_START_DAY"] = project_start_day
         _global_dict["TODAY_RESULT"] = today_result
         if not os.path.exists(today_result):
-            os.mkdir(today_result)
+            os.makedirs(today_result)
         # init log
         logger_name = logger_name if logger_name else "Single"
-        CustomLog(logger_name, os.path.join(today_result, project_start_time + "_log.log"), logging.INFO)
+        CustomLog(logger_name, os.path.join(today_result, "log.log"), logging.INFO)
         _global_dict["LOGGER_NAME"] = logger_name
 
 

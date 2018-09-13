@@ -61,6 +61,7 @@ class Utils:
                 if value:
                     return value
             except Exception as e:
+                cls.logger().warning("Can ignore this info ".format(e))
                 cls.logger().info("Continue to wait")
             time.sleep(2)
             if time.time() > end_time:

@@ -47,6 +47,6 @@ class CommonUnittest(unittest.TestCase):
     @classmethod
     def setUpBeforeClass(cls):
         cls.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", cls.desired_caps)
-        globalvariable.init(cls.desired_caps.get("deviceName", None))
+        globalvariable.init(cls.desired_caps.get("deviceName", cls.desired_caps.get("PLATFORMNAME", "default_android")))
         cls.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
         cls.android_pages = AndroidPages(cls.driver)

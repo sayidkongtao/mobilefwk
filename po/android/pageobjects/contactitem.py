@@ -18,7 +18,7 @@ class ContactItem(BasePageObject):
 # page object
     @property
     def select_checkbox(self):
-        return Utils.find_visible(
+        return Utils.find(
             Input,
             (MobileBy.XPATH, ".//android.widget.CheckBox"),
             "select_checkbox",
@@ -28,7 +28,7 @@ class ContactItem(BasePageObject):
 
     @property
     def contact_name(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, './/android.widget.TextView[@resource-id="cn.cj.pe:id/name"]'),
             "contact_name",
@@ -38,7 +38,7 @@ class ContactItem(BasePageObject):
 
     @property
     def email_text(self):
-        return Utils.find_visible(
+        return Utils.find(
             Text,
             (MobileBy.XPATH, './/android.widget.TextView[@resource-id="cn.cj.pe:id/email"]'),
             "email_text",

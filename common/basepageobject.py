@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 import logging
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import WebDriverWait
-from common import globalvariable
-from selenium.common.exceptions import TimeoutException
-from appium.webdriver.webelement import WebElement
 import os
 import time
+
+from appium.webdriver.webelement import WebElement
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
+
+from common import globalvariable
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -30,9 +32,33 @@ class BasePageObject(object):
     def root(self):
         return self.find_element(self.locator)
 
+    def __capture_screenshot(self, result):
+        capture_driver = self.__driver
+        # Capture the screen for each action
+        if isinstance(self.__driver, WebElement):
+            capture_driver = self.__driver.parent
+        folder = globalvariable.get_value("test_method", "unknown")
+        try:
+            today_result = globalvariable.get_value("TODAY_RESULT")
+            screenshot_path = os.path.join(today_result,
+                                           "screenshot",
+                                           folder
+                                           )
+            if not os.path.exists(screenshot_path):
+                os.makedirs(screenshot_path)
+            capture_driver.save_screenshot(
+                os.path.join(
+                    screenshot_path,
+                    self.page_name + "_" + time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())) + "_"
+                    + result + ".png"
+                )
+            )
+        except Exception as e:
+            self.logger.warning("failed to capture the screenshot, {}".format(e))
+            # folder = "unknown"
+
     def find_element(self, visible=True):
         result = "pass"
-        capture_driver = self.__driver
         try:
             if visible:
                 return WebDriverWait(self.__driver, self.default_time).until(
@@ -50,30 +76,10 @@ class BasePageObject(object):
             raise e
 
         finally:
-            if isinstance(self.__driver, WebElement):
-                capture_driver = self.__driver.parent
-            folder = globalvariable.get_value("test_method", "unknown")
-            try:
-                today_result = globalvariable.get_value("TODAY_RESULT")
-                screenshot_path = os.path.join(today_result,
-                                               "screenshot" + globalvariable.get_value("PROJECT_START_DAY"),
-                                               folder
-                                               )
-                if not os.path.exists(screenshot_path):
-                    os.mkdir(screenshot_path)
-                capture_driver.save_screenshot(
-                    os.path.join(
-                        screenshot_path,
-                        self.page_name + time.strftime('%Y-%m-%d', time.localtime(time.time())) + result
-                    )
-                )
-            except Exception as e:
-                print e
-            finally:
-                print "failed to capture the screenshot"
-                folder = "unknown"
+            self.__capture_screenshot(result)
 
     def find_elements(self, visible=True):
+        result = "pass"
         try:
             if visible:
                 WebDriverWait(self.__driver, self.default_time).until(
@@ -88,7 +94,11 @@ class BasePageObject(object):
             self.logger.error(
                 "on {} cannot find elements: {}, locator: {}".format(self.page_name, self.element_name, self.locator)
             )
+            result = "failed"
             raise e
+
+        finally:
+            self.__capture_screenshot(result)
 
     def clear(self):
         self.logger.info("clear text on element {} on page".format(self.element_name, self.page_name))
