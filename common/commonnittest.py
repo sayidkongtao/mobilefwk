@@ -6,7 +6,7 @@ import os
 import unittest
 
 from common import globalvariable
-from po.ios.androdpages import IOSPages
+from po.ios.iospages import IOSPages
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -33,4 +33,4 @@ class CommonUnittest(unittest.TestCase):
         # globalvariable.init(cls.desired_caps.get("deviceName", cls.desired_caps.get("PLATFORMNAME", "default_android")))
         cls.driver = globalvariable.get_value("APPIUM_DRIVER")
         cls.logger = logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
-        cls.android_pages = IOSPages(cls.driver)
+        cls.ios_pages = IOSPages(cls.driver)

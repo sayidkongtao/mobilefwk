@@ -149,7 +149,7 @@ class MessageListPage(BasePage):
 # page logic
     def at(self):
         self.logger.info("Wait for page MessageListPage")
-        Utils.wait_until_condition(lambda: self.driver.current_activity == ".activity.MessageList")
+        Utils.wait_until_condition(lambda: self.write_email_button.is_visible())
         return True
 
     def check_update(self):

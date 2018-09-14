@@ -59,7 +59,7 @@ class SelectContactPage(BasePage):
     def first_person_under_selected_group(self, name):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//XCUIElementTypeStaticText[@name={}"]'.format(name)),
+            (MobileBy.XPATH, '//XCUIElementTypeStaticText[contains(@name,"{}")]'.format(name)),
             "First Person",
             "SelectContactPage",
             self.driver
@@ -69,12 +69,12 @@ class SelectContactPage(BasePage):
 # page Logic
 
     def select_first_contact(self, value):
+        self.search_input.send_keys(value)
         self.first_person_under_selected_group(value).click()
         self.confirm_button.click()
         return value
 
     def search_then_select(self, value):
-        self.search_input.send_keys(value)
         return self.select_first_contact(value)
 
     def select_under_group(self, value):

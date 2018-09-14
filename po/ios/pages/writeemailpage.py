@@ -18,7 +18,7 @@ class WriteEmailPage(BasePage):
     def goto_message_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ACCESSIBILITY_ID,
+            (MobileBy.XPATH,
              '//XCUIElementTypeNavigationBar[@name="PMWriteMailVC"]/XCUIElementTypeButton[1]'),
             "<",
             "WriteEmailPage",
@@ -275,7 +275,7 @@ class WriteEmailPage(BasePage):
     def give_up_send_email(self):
         self.logger.info("give_up_send_email")
         self.goto_message_button.click()
-        if self.give_up_email_button.is_visible(3):
+        if self.give_up_email_button.is_visible(5):
             self.give_up_email_button.click()
 
     def delete_first_contact(self):

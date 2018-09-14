@@ -4,7 +4,7 @@ __author__ = 'Tao Kong'
 import logging
 
 from common import globalvariable
-from po.ios.androdpages import IOSPages
+from po.ios.iospages import IOSPages
 from po.ios.pages.messagelistpage import MessageListPage
 from utils.utils import Utils
 

@@ -16,17 +16,14 @@ from testcase import test_demo
 if __name__ == "__main__":
     # desired_caps
     desired_caps = {
-        "platformName": "Android",
-        "PlatformVersion": "6.0",
-        "deviceName": "GSL0217214000631",
-        "appPackage": "cn.cj.pe",
-        "appActivity": "com.mail139.about.LaunchActivity",
-        "app": r"C:\Users\Administrator\Desktop\testForAppium\139Email.apk",
-        "unicodeKeyboard": "true",
-        "resetKeyboard": "true",
-        "unicodeKeyboard": "true",
-        "resetKeyboard": "true",
-        "noReset": True
+        "platformName": "ios",
+        "PlatformVersion": "10.3.2",
+        "deviceName": "iPhone SE",
+        "newCommandTimeout": 7200,
+        "udid": "4b0238f989e15ecf933663a554d55daac3de8f06",
+        "automationName": "XCUITest",
+        "bundleId": "com.leadtone.mig.139pe.iPhone",
+        "noReset": "true"
     }
 
     desired_caps_bak = {
@@ -43,7 +40,7 @@ if __name__ == "__main__":
     }
 
     # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
+    driver = webdriver.Remote("http://10.10.58.30:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
