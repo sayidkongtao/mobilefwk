@@ -24,8 +24,14 @@ def init(logger_name=None, platformName="default_android"):
         project_start_time = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
         project_start_day = time.strftime('%Y-%m-%d', time.localtime(time.time()))
         _global_dict["PLATFORMNAME"] = platformName
-        today_result = PATH(
-            os.path.join(".." + os.sep, "result", project_start_day, _global_dict["PLATFORMNAME"], project_start_time))
+        today_result = ""
+        if os.getenv("APPIUM_SCREENSHOT_DIR"):
+            today_result = os.path.join(os.getenv("APPIUM_SCREENSHOT_DIR"), "result", project_start_day,
+                                        _global_dict["PLATFORMNAME"], project_start_time)
+        else:
+            today_result = PATH(
+                os.path.join(".." + os.sep, "result", project_start_day, _global_dict["PLATFORMNAME"],
+                             project_start_time))
         _global_dict["PROJECT_START_TIME"] = project_start_time
         _global_dict["PROJECT_START_DAY"] = project_start_day
         _global_dict["TODAY_RESULT"] = today_result
