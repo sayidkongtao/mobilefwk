@@ -4,8 +4,8 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
-from po.android.pageobjects.input import Input
+from po.ios.pageobjects.button import Button
+from po.ios.pageobjects.input import Input
 from utils.utils import Utils
 
 
@@ -19,7 +19,7 @@ class LoginPage(BasePage):
         return Utils.find(
             Input,
             (MobileBy.XPATH,
-             '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_number"]//android.widget.EditText'),
+             '//ios.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_number"]//ios.widget.EditText'),
             "account_input",
             "LoginPage",
             self.driver
@@ -30,7 +30,7 @@ class LoginPage(BasePage):
         return Utils.find(
             Input,
             (MobileBy.XPATH,
-             '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_password"]//android.widget.EditText'),
+             '//ios.widget.LinearLayout[@resource-id="cn.cj.pe:id/register_password"]//ios.widget.EditText'),
             "account_input",
             "LoginPage",
             self.driver

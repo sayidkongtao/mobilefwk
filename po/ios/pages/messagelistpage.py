@@ -4,8 +4,8 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
-from po.android.pageobjects.text import Text
+from po.ios.pageobjects.button import Button
+from po.ios.pageobjects.text import Text
 from utils.utils import Utils
 
 
@@ -37,7 +37,7 @@ class MessageListPage(BasePage):
     def write_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[3]'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMInbox"]/XCUIElementTypeButton[4]'),
             "write_email_button",
             "MessageListPage",
             self.driver
@@ -58,7 +58,7 @@ class MessageListPage(BasePage):
     def more_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[1]'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMInbox"]/XCUIElementTypeButton[1]'),
             'more_menu',
             "MessageListPage",
             self.driver
@@ -68,7 +68,7 @@ class MessageListPage(BasePage):
     def folder(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/menu_item_other_text'),
+            (MobileBy.ACCESSIBILITY_ID, '文件夹'),
             "文件夹",
             "MessageListPage",
             self.driver
@@ -78,7 +78,7 @@ class MessageListPage(BasePage):
     def sent_email(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//android.widget.TextView[@text="已发送"]'),
+            (MobileBy.ACCESSIBILITY_ID, '已发送'),
             "已发送",
             "MessageListPage",
             self.driver
@@ -88,7 +88,7 @@ class MessageListPage(BasePage):
     def draft_email(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//android.widget.TextView[@text="草稿箱"]'),
+            (MobileBy.ACCESSIBILITY_ID, '草稿箱'),
             "已发送",
             "MessageListPage",
             self.driver
@@ -99,7 +99,7 @@ class MessageListPage(BasePage):
     def first_email_subject(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//android.widget.TextView[@resource-id="cn.cj.pe:id/mail_subject"]'),
+            (MobileBy.XPATH, '//ios.widget.TextView[@resource-id="cn.cj.pe:id/mail_subject"]'),
             "第一个邮件主题",
             "MessageListPage",
             self.driver
@@ -110,7 +110,7 @@ class MessageListPage(BasePage):
     def email_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_email'),
+            (MobileBy.ACCESSIBILITY_ID, '邮件'),
             "邮件",
             "MessageListPage",
             self.driver
@@ -120,7 +120,7 @@ class MessageListPage(BasePage):
     def contact_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_contacts'),
+            (MobileBy.ACCESSIBILITY_ID, '联系人'),
             "联系人",
             "MessageListPage",
             self.driver
@@ -130,7 +130,7 @@ class MessageListPage(BasePage):
     def find_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_find'),
+            (MobileBy.ACCESSIBILITY_ID, '发现'),
             "发现",
             "MessageListPage",
             self.driver
@@ -140,7 +140,7 @@ class MessageListPage(BasePage):
     def mine_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/message_list_bottom_mine'),
+            (MobileBy.ACCESSIBILITY_ID, '我的'),
             "我的",
             "MessageListPage",
             self.driver

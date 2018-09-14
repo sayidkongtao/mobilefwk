@@ -4,7 +4,7 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
+from po.ios.pageobjects.button import Button
 from utils.utils import Utils
 
 

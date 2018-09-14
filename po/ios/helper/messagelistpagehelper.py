@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 
-from po.android.pages.messagelistpage import MessageListPage
-from po.android.androdpages import AndroidPages
-from utils.utils import Utils
 import logging
+
 from common import globalvariable
+from po.ios.androdpages import IOSPages
+from po.ios.pages.messagelistpage import MessageListPage
+from utils.utils import Utils
 
 
 class MessageListHelper(object):
@@ -17,7 +18,7 @@ class MessageListHelper(object):
     @classmethod
     def login(cls, android_pages):
         cls.logger().info("Login app")
-        if isinstance(android_pages, AndroidPages):
+        if isinstance(android_pages, IOSPages):
             android_pages.navigationpage.reset()
             android_pages.navigationpage.goto_accountdomainselect()
             android_pages.accountdomainselectpage.goto_login()

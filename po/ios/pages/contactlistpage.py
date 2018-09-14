@@ -4,9 +4,9 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
-from po.android.pageobjects.input import Input
-from po.android.pageobjects.text import Text
+from po.ios.pageobjects.button import Button
+from po.ios.pageobjects.input import Input
+from po.ios.pageobjects.text import Text
 from utils.utils import Utils
 
 
@@ -18,7 +18,7 @@ class ContactListPage(BasePage):
     def title(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/actionbar_sub_title'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMContactVC"]/XCUIElementTypeButton[1]'),
             "联系人",
             "ContactListPage",
             self.driver
@@ -28,7 +28,7 @@ class ContactListPage(BasePage):
     def search_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[1]'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMContactVC"]/XCUIElementTypeButton[2]'),
             "Search Button",
             "ContactListPage",
             self.driver
@@ -38,26 +38,25 @@ class ContactListPage(BasePage):
     def search_input(self):
         return Utils.find(
             Input,
-            (MobileBy.ID, "cn.cj.pe:id/search"),
+            (MobileBy.ACCESSIBILITY_ID, "搜索"),
             "联系人搜索框",
             "ContactListPage",
             self.driver
         )
 
-    @property
-    def first_contact(self):
+    def first_contact(self, value):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/name'),
+            (MobileBy.XPATH, '(//XCUIElementTypeStaticText[@name="{}"])[2]'.format(value)),
             "第一个联系人",
             "ContactListPage",
             self.driver
         )
 
     #  page logic
-    def search_then_select_to_(self, value):
+    def search_then_select_to_contentdetails(self, value):
         self.search_button.click()
         self.search_input.send_keys(value)
-        text = self.first_contact.text()
+        text = self.first_contact(value).text()
         self.first_contact.click()
         return text

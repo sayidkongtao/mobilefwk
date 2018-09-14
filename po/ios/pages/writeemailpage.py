@@ -4,9 +4,9 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
-from po.android.pageobjects.input import Input
-from po.android.pageobjects.text import Text
+from po.ios.pageobjects.button import Button
+from po.ios.pageobjects.input import Input
+from po.ios.pageobjects.text import Text
 from utils.utils import Utils
 
 
@@ -18,7 +18,8 @@ class WriteEmailPage(BasePage):
     def goto_message_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/actionbar_back"),
+            (MobileBy.ACCESSIBILITY_ID,
+             '//XCUIElementTypeNavigationBar[@name="PMWriteMailVC"]/XCUIElementTypeButton[1]'),
             "<",
             "WriteEmailPage",
             self.driver
@@ -28,7 +29,7 @@ class WriteEmailPage(BasePage):
     def send_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/txt_send"),
+            (MobileBy.ACCESSIBILITY_ID, "发送"),
             "发送",
             "WriteEmailPage",
             self.driver
@@ -38,7 +39,7 @@ class WriteEmailPage(BasePage):
     def add_to_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/add_to"),
+            (MobileBy.ACCESSIBILITY_ID, "write add user"),
             "add_to_button",
             "WriteEmailPage",
             self.driver
@@ -48,7 +49,7 @@ class WriteEmailPage(BasePage):
     def add_cc_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/add_cc"),
+            (MobileBy.ACCESSIBILITY_ID, "write add user"),
             "add_to_button",
             "WriteEmailPage",
             self.driver
@@ -58,7 +59,7 @@ class WriteEmailPage(BasePage):
     def add_bcc_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/add_bcc"),
+            (MobileBy.ACCESSIBILITY_ID, "write add user"),
             "add_to_button",
             "WriteEmailPage",
             self.driver
@@ -79,8 +80,8 @@ class WriteEmailPage(BasePage):
     def first_receiver(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '(//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]\
-             //android.widget.TextView)[2]'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeStaticText[contains(@name,"收件人")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "first_receiver",
             "WriteEmailPage",
             self.driver
@@ -90,7 +91,7 @@ class WriteEmailPage(BasePage):
     def delete_receive(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/delete"),
+            (MobileBy.ACCESSIBILITY_ID, "移除"),
             "移除",
             "WriteEmailPage",
             self.driver
@@ -101,7 +102,7 @@ class WriteEmailPage(BasePage):
     def cc_bcc_item(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/cc_lable'),
+            (MobileBy.ACCESSIBILITY_ID, '抄送/密送:'),
             "抄送/密送",
             "WriteEmailPage",
             self.driver
@@ -122,7 +123,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
+             '//XCUIElementTypeStaticText[contains(@name,"抄")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -143,7 +144,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
+             '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//ios.view.ViewGroup//ios.widget.TextView'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -153,7 +154,8 @@ class WriteEmailPage(BasePage):
     def subject_input(self):
         return Utils.find(
             Input,
-            (MobileBy.ID, 'cn.cj.pe:id/subject'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeStaticText[contains(@name,"主")]//following-sibling::XCUIElementTypeTextField'),
             "主题",
             "WriteEmailPage",
             self.driver
@@ -164,7 +166,7 @@ class WriteEmailPage(BasePage):
     def cancel_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/left'),
+            (MobileBy.ACCESSIBILITY_ID, '取消'),
             "取消",
             "WriteEmailPage",
             self.driver
@@ -174,7 +176,7 @@ class WriteEmailPage(BasePage):
     def give_up_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/mid'),
+            (MobileBy.ACCESSIBILITY_ID, '放弃'),
             "放弃",
             "WriteEmailPage",
             self.driver
@@ -184,7 +186,7 @@ class WriteEmailPage(BasePage):
     def save_to_draft_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/right'),
+            (MobileBy.ACCESSIBILITY_ID, '保存为草稿'),
             "保存为草稿",
             "WriteEmailPage",
             self.driver
@@ -194,7 +196,7 @@ class WriteEmailPage(BasePage):
     def warning_message(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/message'),
+            (MobileBy.ACCESSIBILITY_ID, '放弃写邮件并保存草稿箱？'),
             "warning_message",
             "WriteEmailPage",
             self.driver
@@ -204,7 +206,7 @@ class WriteEmailPage(BasePage):
     def send_direct_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/right'),
+            (MobileBy.ACCESSIBILITY_ID, '直接发送'),
             "send_direct_button",
             "WriteEmailPage",
             self.driver
@@ -215,7 +217,7 @@ class WriteEmailPage(BasePage):
     def back_result_button(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, "cn.cj.pe:id/hjl_headicon"),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="发送失败"]/XCUIElementTypeButton'),
             "<",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
@@ -225,17 +227,17 @@ class WriteEmailPage(BasePage):
     def send_success_img(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/gif_success_img'),
+            (MobileBy.ACCESSIBILITY_ID, 'send_success7.png'),
             "send_success_img",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
         )
 
     @property
-    def send_failed_text(self):
+    def send_failed_img(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/progressText'),
+            (MobileBy.ACCESSIBILITY_ID, 'write_send_error.png'),
             "发送失败",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
@@ -245,8 +247,8 @@ class WriteEmailPage(BasePage):
     def back_to_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/back_to_list'),
-            "back_to_email_button",
+            (MobileBy.ACCESSIBILITY_ID, '返回邮箱'),
+            "返回邮箱",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
         )
@@ -329,5 +331,5 @@ class WriteEmailPage(BasePage):
         self.receive_label.click()
         self.receive_label.send_keys(contact)
         self.send_button.click()
-        Utils.wait_until_condition(lambda: self.send_failed_text.text() == "发送失败")
+        Utils.wait_until_condition(lambda: self.send_failed_img.text() == "发送失败")
         self.back_result_button.click()

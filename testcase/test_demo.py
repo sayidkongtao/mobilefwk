@@ -4,8 +4,8 @@ import unittest
 
 from common import globalvariable
 from common.commonnittest import CommonUnittest
-from po.android.helper import giveupemailhelper
-from po.android.helper.messagelistpagehelper import MessageListHelper
+from po.ios.helper import giveupemailhelper
+from po.ios.helper.messagelistpagehelper import MessageListHelper
 from utils.utils import Utils
 
 
@@ -126,7 +126,7 @@ class Demo(CommonUnittest):
     def goto_contact_details_16(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
-        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        name = self.android_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.android_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
         self.assertTrue(name, check_name)
@@ -134,7 +134,7 @@ class Demo(CommonUnittest):
     def check_previous_email_17(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
-        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        name = self.android_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.android_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
         self.assertTrue(name, check_name)
@@ -147,7 +147,7 @@ class Demo(CommonUnittest):
     def check_next_email_18(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
-        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        name = self.android_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.android_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
         self.assertTrue(name, check_name)
@@ -160,7 +160,7 @@ class Demo(CommonUnittest):
     def check_reply_email_19(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
-        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        name = self.android_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.android_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
         self.assertTrue(name, check_name)
@@ -175,7 +175,7 @@ class Demo(CommonUnittest):
     def check_forward_email_20(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
-        name = self.android_pages.contactlistpage.search_then_select_to_("Sayid")
+        name = self.android_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.android_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
         self.assertTrue(name, check_name)

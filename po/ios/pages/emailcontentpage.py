@@ -3,10 +3,10 @@ __author__ = 'Tao Kong'
 
 from appium.webdriver.common.mobileby import MobileBy
 
-from po.android.pageobjects.button import Button
-from po.android.pageobjects.input import Input
-from po.android.pageobjects.text import Text
-from po.android.pages.writeemailpage import WriteEmailPage
+from po.ios.pageobjects.button import Button
+from po.ios.pageobjects.input import Input
+from po.ios.pageobjects.text import Text
+from po.ios.pages.writeemailpage import WriteEmailPage
 from utils.utils import Utils
 
 
@@ -19,7 +19,7 @@ class EmailContentPage(WriteEmailPage):
     def next_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/actionbar_next'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]/XCUIElementTypeButton[3]'),
             "Next Button",
             "EmailContent",
             self.driver
@@ -29,7 +29,7 @@ class EmailContentPage(WriteEmailPage):
     def previous_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/actionbar_previous'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]/XCUIElementTypeButton[1]'),
             "Previous Button",
             "EmailContent",
             self.driver
@@ -39,7 +39,8 @@ class EmailContentPage(WriteEmailPage):
     def email_title(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/title'),
+            (MobileBy.XPATH,
+             '(//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[1]'),
             "邮件主题",
             "EmailContent",
             self.driver
@@ -49,7 +50,8 @@ class EmailContentPage(WriteEmailPage):
     def default_email_sender(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/from'),
+            (MobileBy.XPATH,
+             '(//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[2]'),
             "发送人",
             "EmailContent",
             self.driver
@@ -60,7 +62,7 @@ class EmailContentPage(WriteEmailPage):
         return Utils.find(
             Button,
             (MobileBy.XPATH,
-             '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/bottomBar_message"]//android.widget.TextView[@text="回复"]'),
+             '(//XCUIElementTypeImage[@name="separator.png"]//following-sibling::XCUIElementTypeButton)[1]'),
             "回复",
             "EmailContent",
             self.driver
@@ -71,33 +73,13 @@ class EmailContentPage(WriteEmailPage):
         return Utils.find(
             Button,
             (MobileBy.XPATH,
-             '//android.widget.LinearLayout[@resource-id="cn.cj.pe:id/bottomBar_message"]//android.widget.TextView[@text="转发"]'),
+             '(//XCUIElementTypeImage[@name="separator.png"]//following-sibling::XCUIElementTypeButton)[3]'),
             "转发",
             "EmailContent",
             self.driver
         )
 
     # reply email content and forward email content
-    @property
-    def receiver(self):
-        return Utils.find(
-            Text,
-            (MobileBy.ID, 'cn.cj.pe:id/contact_to'),
-            "收件人邮箱",
-            "EmailContent",
-            self.driver
-        )
-
-    @property
-    def email_subject(self):
-        return Utils.find(
-            Text,
-            (MobileBy.ID, 'cn.cj.pe:id/subject'),
-            "主题",
-            "EmailContent",
-            self.driver
-        )
-
     @property
     def reply_email_content(self):
         return Utils.find(
@@ -112,15 +94,14 @@ class EmailContentPage(WriteEmailPage):
     def confirm_contains_old_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, 'cn.cj.pe:id/sure_btn'),
+            (MobileBy.ACCESSIBILITY_ID, '确定'),
             "确定",
             "RE_EmailContent",
             self.driver
         )
 
     # page logic
-    def reply_forward_email_success(self, value="test"):
-        self.reply_email_content.send_keys(value)
+    def reply_forward_email_success(self):
         self.send_button.click()
         if self.confirm_contains_old_email_button.is_visible(5):
             self.confirm_contains_old_email_button.click()
@@ -141,17 +122,17 @@ class EmailContentPage(WriteEmailPage):
         second_title = self.email_title.text()
         return first_title == second_title
 
-    def reply_email_success(self, value="test"):
+    def reply_email_success(self):
         sender = self.default_email_sender.text()
         self.reply_button.click()
-        receiver = self.receiver.text()
+        receiver = self.first_receiver.text()
         text = self.subject_input.text()
-        self.reply_forward_email_success(value)
+        self.reply_forward_email_success()
         return text.startswith("Re"), sender.strip() == receiver.strip()
 
-    def forward_email_success(self, value="test"):
+    def forward_email_success(self):
         self.forward_button.click()
-        self.receiver.send_keys("Sayid")
+        self.first_receiver.send_keys("Sayid")
         text = self.subject_input.text()
-        self.reply_forward_email_success(value)
+        self.reply_forward_email_success()
         return text.startswith("Fwd:")

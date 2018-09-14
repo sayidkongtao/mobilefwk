@@ -5,7 +5,7 @@ __author__ = 'Tao Kong'
 from appium.webdriver.common.mobileby import MobileBy
 
 from common.basepage import BasePage
-from po.android.pageobjects.button import Button
+from po.ios.pageobjects.button import Button
 from utils.utils import Utils
 
 
@@ -18,7 +18,7 @@ class AccountDomainsSelectPage(BasePage):
     def email139_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, "//android.widget.ListView/android.widget.RelativeLayout[1]"),
+            (MobileBy.XPATH, "//ios.widget.ListView/ios.widget.RelativeLayout[1]"),
             "email139_button",
             "AccountDomainsSelectPage",
             self.driver

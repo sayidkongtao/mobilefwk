@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 
-from po.android.pages.messagelistpage import MessageListPage
-from po.android.pages.writeemailpage import WriteEmailPage
+from po.ios.pages.messagelistpage import MessageListPage
+from po.ios.pages.writeemailpage import WriteEmailPage
 
 
 def give_up(appium_driver):
