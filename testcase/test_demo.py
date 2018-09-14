@@ -23,7 +23,7 @@ class Demo(CommonUnittest):
         MessageListHelper.login(self.android_pages)
 
     def goto_write_email_page_5(self):
-        MessageListHelper.login(self.android_pages)
+        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.android_pages.writeemailpage.at())
 
@@ -123,14 +123,6 @@ class Demo(CommonUnittest):
         context = "Content" + subject
         self.android_pages.writeemailpage.send_email_failed("sayid_kttao", subject, context)
 
-    def send_email_failed_15(self):
-        MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
-        self.android_pages.messagelistpage.goto_write_email_page()
-        self.assertTrue(self.android_pages.writeemailpage.at())
-        subject = Utils.now()
-        context = "Content" + subject
-        self.android_pages.writeemailpage.send_email_failed("sayid_kttao", subject, context)
-
     def goto_contact_details_16(self):
         MessageListHelper.relaunch_app(self.android_pages.messagelistpage)
         self.android_pages.messagelistpage.goto_contact_list_page()
@@ -200,22 +192,8 @@ def suite():
         map(
             Demo,
             [
-                "login_4",
-                "goto_write_email_page_5",
-                "select_contact_6",
-                "search_and_select_contact_7",
-                "select_group_contact_8",
-                "delete_receiver_9",
                 "add_cc_bcc_10",
-                "send_email_without_subject_11",
-                "send_email_success_12",
-                "save_email_to_draft_14",
-                "send_email_failed_15",
-                "goto_contact_details_16",
-                "check_previous_email_17",
-                "check_next_email_18",
-                "check_reply_email_19",
-                "check_forward_email_20"
+                ""
              ]
         )
     )

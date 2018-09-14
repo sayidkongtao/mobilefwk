@@ -10,17 +10,18 @@ import os
 import unittest
 from appium import webdriver
 from common import globalvariable
-from public.HTMLTestRunner import HTMLTestRunner
 from testcase import test_demo
+
 
 if __name__ == "__main__":
     # desired_caps
-    desired_caps_loc = {
+    desired_caps = {
         "platformName": "Android",
         "PlatformVersion": "6.0",
-        "deviceName": "HC43YWW01974",
+        "deviceName": "GSL0217214000631",
         "appPackage": "cn.cj.pe",
         "appActivity": "com.mail139.about.LaunchActivity",
+        "app": r"C:\Users\Administrator\Desktop\testForAppium\139Email.apk",
         "unicodeKeyboard": "true",
         "resetKeyboard": "true",
         "unicodeKeyboard": "true",
@@ -28,7 +29,7 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    desired_caps = {
+    desired_caps_bak = {
         "platformName": os.getenv('APPIUM_PLATFORM'),
         "PlatformVersion": os.getenv('APPIUM_DEVICE_VERSION'),
         "deviceName": os.getenv('APPIUM_DEVICE_NAME'),
@@ -51,7 +52,10 @@ if __name__ == "__main__":
     report_file = os.path.join(globalvariable.get_value("TODAY_RESULT"), "Report.html")
     report_title = "Demo"
     desc = "Demo For Test"
-
-    with open(report_file, 'wb') as report:
+    runner = unittest.TextTestRunner(verbosity=2)
+    runner.run(suite)
+    '''
+        with open(report_file, 'wb') as report:
         runner = HTMLTestRunner(stream=report, title=report_title, description=desc)
         runner.run(suite)
+    '''

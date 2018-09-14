@@ -79,8 +79,8 @@ class WriteEmailPage(BasePage):
     def first_receiver(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]\
-            //android.view.View//android.widget.TextView'),
+            (MobileBy.XPATH, '(//android.widget.RelativeLayout[@resource-id="cn.cj.pe:id/to_layout"]\
+             //android.widget.TextView)[2]'),
             "first_receiver",
             "WriteEmailPage",
             self.driver
@@ -121,7 +121,8 @@ class WriteEmailPage(BasePage):
     def first_p_under_cc_item(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.view.View//android.widget.TextView'),
+            (MobileBy.XPATH,
+             '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -141,7 +142,8 @@ class WriteEmailPage(BasePage):
     def first_p_under_bcc_item(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//android.view.View//android.widget.TextView'),
+            (MobileBy.XPATH,
+             '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver

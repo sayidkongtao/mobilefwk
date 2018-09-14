@@ -117,9 +117,14 @@ class BasePageObject(object):
         self.find_element(self.locator).click()
 
     def text(self):
-        self.logger.info("get text of element {} on page {}".format(self.element_name, self.page_name))
-        text = self.find_element(self.locator).text
-        self.logger.info("element {} text is: {} on page".format(self.element_name, text, self.page_name))
+        text = ""
+        try:
+            self.logger.info("get text of element {} on page {}".format(self.element_name, self.page_name))
+            text = self.find_element(self.locator).text
+            self.logger.info("element {} text is: {} on page".format(self.element_name, text, self.page_name))
+        except Exception as e:
+            self.logger.warning(e)
+            self.logger.info("Failed to get the text, so return the default value: ".format(" "))
         return text
 
     def is_visible(self, default_time=10):
