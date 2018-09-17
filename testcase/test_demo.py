@@ -206,10 +206,10 @@ def suite():
                 "save_email_to_draft_14",
                 "send_email_failed_15",
                 "goto_contact_details_16",
-                "check_previous_email_17",
-                "check_next_email_18",
-                "check_reply_email_19",
-                "check_forward_email_20"
+                # "check_previous_email_17",
+                # "check_next_email_18",
+                # "check_reply_email_19",
+                # "check_forward_email_20"
              ]
         )
     )

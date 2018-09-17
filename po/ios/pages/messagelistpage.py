@@ -111,7 +111,8 @@ class MessageListPage(BasePage):
     def contact_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//XCUIElementTypeImage[@name="bottom_nav_contacts_normal"]'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeApplication[@name="139mail"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]'),
             "联系人",
             "MessageListPage",
             self.driver

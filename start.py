@@ -15,18 +15,18 @@ from testcase import test_demo
 
 if __name__ == "__main__":
     # desired_caps
-    desired_caps_bak = {
+    desired_caps = {
         "platformName": "ios",
-        "PlatformVersion": "10.3.2",
-        "deviceName": "iPhone SE",
+        "PlatformVersion": "11.4.1",
+        "deviceName": "iPhone",
         "newCommandTimeout": 7200,
-        "udid": "4b0238f989e15ecf933663a554d55daac3de8f06",
+        "udid": "17d28db11b1d8266059ec407dfda8dbda6f366c9",
         "automationName": "XCUITest",
         "bundleId": "com.leadtone.mig.139pe.iPhone",
         "noReset": "true"
     }
 
-    desired_caps = {
+    desired_caps_bak = {
         "platformName": os.getenv('APPIUM_PLATFORM'),
         "PlatformVersion": os.getenv('APPIUM_DEVICE_VERSION'),
         "deviceName": os.getenv('APPIUM_DEVICE_NAME'),
@@ -39,8 +39,8 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    #driver = webdriver.Remote("http://10.10.58.13:4723/wd/hub", desired_caps)
+    # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
+    driver = webdriver.Remote("http://10.10.58.13:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
