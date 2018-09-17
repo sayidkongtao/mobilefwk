@@ -122,7 +122,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
+             '(//*[@resource-id="cn.cj.pe:id/cc_wrapper"]//android.widget.TextView)[2]'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -143,7 +143,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//android.view.ViewGroup//android.widget.TextView'),
+             '(//*[@resource-id="cn.cj.pe:id/bcc_layout"]//android.widget.TextView)[2]'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver

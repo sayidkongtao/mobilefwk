@@ -24,8 +24,6 @@ if __name__ == "__main__":
         "app": r"C:\Users\Administrator\Desktop\testForAppium\139Email.apk",
         "unicodeKeyboard": "true",
         "resetKeyboard": "true",
-        "unicodeKeyboard": "true",
-        "resetKeyboard": "true",
         "noReset": True
     }
 
