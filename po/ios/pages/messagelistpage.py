@@ -14,16 +14,6 @@ class MessageListPage(BasePage):
         super(MessageListPage, self).__init__(appium_driver)
 
     @property
-    def title(self):
-        return Utils.find(
-            Text,
-            (MobileBy.ID, 'cn.cj.pe:id/actionbar_sub_title'),
-            "title",
-            "MessageListPage",
-            self.driver
-        )
-
-    @property
     def refresh_quee_view_button(self):
         return Utils.find(
             Button,
@@ -99,7 +89,8 @@ class MessageListPage(BasePage):
     def first_email_subject(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//ios.widget.TextView[@resource-id="cn.cj.pe:id/mail_subject"]'),
+            (MobileBy.XPATH,
+             '(//XCUIElementTypeNavigationBar[@name="PMInbox"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[3]'),
             "第一个邮件主题",
             "MessageListPage",
             self.driver
@@ -120,7 +111,7 @@ class MessageListPage(BasePage):
     def contact_bar(self):
         return Utils.find(
             Text,
-            (MobileBy.ACCESSIBILITY_ID, '联系人'),
+            (MobileBy.XPATH, '//XCUIElementTypeImage[@name="bottom_nav_contacts_normal"]'),
             "联系人",
             "MessageListPage",
             self.driver
@@ -171,13 +162,15 @@ class MessageListPage(BasePage):
     def goto_sent_page(self):
         self.more_button.click()
         self.sent_email.click()
-        Utils.wait_until_condition(lambda: self.title.text() == "已发送")
+        # Utils.wait_until_condition(lambda: self.title.text() == "已发送")
+        Utils.wait_until_condition(lambda: self.write_email_button.is_visible())
         self.wait_for_page_fresh()
 
     def goto_draft_page(self):
         self.more_button.click()
         self.draft_email.click()
-        Utils.wait_until_condition(lambda: self.title.text() == "草稿箱")
+        # Utils.wait_until_condition(lambda: self.title.text() == "草稿箱")
+        Utils.wait_until_condition(lambda: self.write_email_button.is_visible())
         self.wait_for_page_fresh()
 
     def goto_contact_list_page(self):

@@ -40,24 +40,8 @@ class BasePage(object):
     def back(self):
         self.driver.back()
 
-    def press_key(self, code):
-        self.driver.press_keycode(code)
-
     def switch_to_web_view(self, view_name):
         self.driver.switch_to.context(view_name)
-
-    def set_value_by_keys(self, value):
-        letterToCodeHashMap = {}
-        lettersStr = "a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z @ . + _ 0 1 2 3 4 5 6 7 8 9".split()
-        androidCodes = [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
-                        53, 54, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-                        51, 52, 53, 54, 77, 56, 81, 69, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-        for index in range(len(lettersStr)):
-            letterToCodeHashMap[lettersStr[index]] = androidCodes[index]
-        for i in range(len(value)):
-            code = letterToCodeHashMap.get(value[i])
-            self.pressKey(code)
-            time.sleep(0.5)
 
     # 屏幕向上滑动
     def swipe_up(self, t=1000):

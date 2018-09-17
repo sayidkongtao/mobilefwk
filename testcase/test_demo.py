@@ -33,8 +33,8 @@ class Demo(CommonUnittest):
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
         context = self.ios_pages.selectcontactpage.select_first_contact("Sayid")
-        first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context, first_receiver)
+        # first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
+        # self.assertEqual(context, first_receiver)
         giveupemailhelper.give_up(self.driver)
 
     def search_and_select_contact_7(self):
@@ -43,17 +43,17 @@ class Demo(CommonUnittest):
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
         context = self.ios_pages.selectcontactpage.search_then_select("Postmaster")
-        first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context, first_receiver)
+        # first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
+        # self.assertEqual(context, first_receiver)
 
     def select_group_contact_8(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
-        context = self.ios_pages.selectcontactpage.select_under_group("湖北移动")
-        first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context, first_receiver)
+        context = self.ios_pages.selectcontactpage.select_under_group("读信联系人", "湖北移动")
+        # first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
+        # self.assertEqual(context, first_receiver)
         giveupemailhelper.give_up(self.driver)
 
     def delete_receiver_9(self):
@@ -62,8 +62,8 @@ class Demo(CommonUnittest):
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
         context = self.ios_pages.selectcontactpage.select_first_contact("Sayid")
-        first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context, first_receiver)
+        # first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
+        # self.assertEqual(context, first_receiver)
         self.ios_pages.writeemailpage.delete_first_contact()
         giveupemailhelper.give_up(self.driver)
 
@@ -72,8 +72,8 @@ class Demo(CommonUnittest):
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         cc_text, bcc_text = self.ios_pages.writeemailpage.add_cc_bcc()
-        self.assertTrue(cc_text, "test")
-        self.assertTrue(bcc_text, "test")
+        # self.assertEqual(cc_text, "test@")
+        # self.assertEqual(bcc_text, "test@")
         giveupemailhelper.give_up(self.driver)
 
     def send_email_without_subject_11(self):
@@ -81,22 +81,22 @@ class Demo(CommonUnittest):
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
-        context = self.ios_pages.selectcontactpage.select_first_contact()
+        context = self.ios_pages.selectcontactpage.select_first_contact("Sayid")
         first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context["name"], first_receiver)
+        # self.assertEqual(context, first_receiver)
         self.ios_pages.writeemailpage.send_without_subject()
         self.ios_pages.messagelistpage.goto_sent_page()
         text = self.ios_pages.messagelistpage.first_email_subject.text()
-        self.assertTrue(text, "无主题")
+        self.assertEqual(text, "无主题")
 
     def send_email_success_12(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
-        context = self.ios_pages.selectcontactpage.select_first_contact()
+        context = self.ios_pages.selectcontactpage.select_first_contact("Sayid")
         first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context["name"], first_receiver)
+        # self.assertEqual(context, first_receiver)
         subject = Utils.now()
         context = "Content" + subject
         self.ios_pages.writeemailpage.send_email_with_subject_content(subject, context)
@@ -106,14 +106,14 @@ class Demo(CommonUnittest):
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
-        context = self.ios_pages.selectcontactpage.select_first_contact()
+        context = self.ios_pages.selectcontactpage.select_first_contact("Sayid")
         first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
-        self.assertTrue(context["name"], first_receiver)
+        # self.assertEqual(context, first_receiver)
         subject = Utils.now()
         self.ios_pages.writeemailpage.save_email_to_draft(subject)
         self.ios_pages.messagelistpage.goto_draft_page()
         text = self.ios_pages.messagelistpage.first_email_subject.text()
-        self.assertTrue(text, "subject")
+        self.assertEqual(text, subject)
 
     def send_email_failed_15(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
@@ -121,7 +121,9 @@ class Demo(CommonUnittest):
         self.assertTrue(self.ios_pages.writeemailpage.at())
         subject = Utils.now()
         context = "Content" + subject
-        self.ios_pages.writeemailpage.send_email_failed("sayid_kttao", subject, context)
+        self.ios_pages.writeemailpage.goto_select_contact_page()
+        self.ios_pages.selectcontactpage.select_first_contact("Abcde")
+        self.ios_pages.writeemailpage.send_email_failed(subject, context)
 
     def goto_contact_details_16(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
@@ -129,7 +131,7 @@ class Demo(CommonUnittest):
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.ios_pages.contactdetailspage.name.text()
         self.logger.info("Check: 此页面为联系人详情页面")
-        self.assertTrue(name, check_name)
+        self.assertEqual(name, check_name)
 
     def check_previous_email_17(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
@@ -193,21 +195,21 @@ def suite():
             Demo,
             [
                 # "login_4",
-                # "goto_write_email_page_5",
-                # "select_contact_6",
-                # "search_and_select_contact_7",
+                "goto_write_email_page_5",
+                "select_contact_6",
+                "search_and_select_contact_7",
                 "select_group_contact_8",
-                # "delete_receiver_9",
-                # "add_cc_bcc_10",
-                # "send_email_without_subject_11",
-                # "send_email_success_12",
-                # "save_email_to_draft_14",
-                # "send_email_failed_15",
-                # "goto_contact_details_16",
-                # "check_previous_email_17",
-                # "check_next_email_18",
-                # "check_reply_email_19",
-                #"check_forward_email_20"
+                "delete_receiver_9",
+                "add_cc_bcc_10",
+                "send_email_without_subject_11",
+                "send_email_success_12",
+                "save_email_to_draft_14",
+                "send_email_failed_15",
+                "goto_contact_details_16",
+                "check_previous_email_17",
+                "check_next_email_18",
+                "check_reply_email_19",
+                "check_forward_email_20"
              ]
         )
     )

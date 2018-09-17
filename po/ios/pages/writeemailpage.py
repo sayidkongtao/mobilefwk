@@ -112,7 +112,8 @@ class WriteEmailPage(BasePage):
     def cc_item(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/cc_wrapper"]'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeStaticText[starts-with(@name,"抄")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "抄送",
             "WriteEmailPage",
             self.driver
@@ -123,7 +124,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//XCUIElementTypeStaticText[contains(@name,"抄")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
+             '//XCUIElementTypeStaticText[starts-with(@name,"抄")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -133,7 +134,8 @@ class WriteEmailPage(BasePage):
     def bcc_item(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/bcc_lable'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeStaticText[starts-with(@name,"密")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "密送",
             "WriteEmailPage",
             self.driver
@@ -144,7 +146,7 @@ class WriteEmailPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//*[@resource-id="cn.cj.pe:id/bcc_wrapper"]//ios.view.ViewGroup//ios.widget.TextView'),
+             '//XCUIElementTypeStaticText[starts-with(@name,"密")]//parent::XCUIElementTypeOther//XCUIElementTypeTextField'),
             "first_p_under_cc_item",
             "WriteEmailPage",
             self.driver
@@ -258,7 +260,8 @@ class WriteEmailPage(BasePage):
     def content_input(self):
         return Utils.find(
             Input,
-            (MobileBy.ID, 'cn.cj.pe:id/message_content'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeNavigationBar[@name="PMWriteMailVC"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeTextView'),
             "正文部分",
             "WriteEmailPage",
             self.driver
@@ -281,8 +284,6 @@ class WriteEmailPage(BasePage):
     def delete_first_contact(self):
         first_receiver = self.first_receiver
         first_receiver.click()
-        # need to click twice
-        first_receiver.click()
         delete_receive = self.delete_receive
         delete_receive.click()
         Utils.wait_disappear(delete_receive)
@@ -291,12 +292,10 @@ class WriteEmailPage(BasePage):
     def add_cc_bcc(self):
         self.cc_bcc_item.click()
         self.cc_item.click()
-        self.cc_item.send_keys("test")
-        self.receive_label.click()
-        self.bcc_item.click()
-        self.bcc_item.send_keys("test")
-        self.receive_label.click()
+        self.cc_item.send_keys("test@")
         cc_text = self.first_p_under_cc_item.text()
+        self.bcc_item.click()
+        self.bcc_item.send_keys("test@")
         bcc_text = self.first_p_under_bcc_item.text()
         return cc_text, bcc_text
 
@@ -323,13 +322,11 @@ class WriteEmailPage(BasePage):
         Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
         self.back_to_email_button.click()
 
-    def send_email_failed(self, contact, subject, content):
+    def send_email_failed(self, subject, content):
         self.subject_input.click()
         self.subject_input.send_keys(subject)
         self.content_input.click()
         self.content_input.send_keys(content)
-        self.receive_label.click()
-        self.receive_label.send_keys(contact)
         self.send_button.click()
-        Utils.wait_until_condition(lambda: self.send_failed_img.text() == "发送失败")
+        Utils.wait_until_condition(lambda: self.send_failed_img.is_visible())
         self.back_result_button.click()

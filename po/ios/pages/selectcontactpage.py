@@ -46,20 +46,30 @@ class SelectContactPage(BasePage):
             self.driver
         )
 
-    @property
-    def read_group(self):
+    def contact_group_by_name(self, group_name):
         return Utils.find(
             Text,
-            (MobileBy.ACCESSIBILITY_ID, '读信联系人'),
-            "读信联系人",
+            (MobileBy.ACCESSIBILITY_ID, group_name),
+            group_name,
             "SelectContactPage",
             self.driver
         )
 
-    def first_person_under_selected_group(self, name):
+    def first_person_under_search(self, name):
         return Utils.find(
             Text,
             (MobileBy.XPATH, '//XCUIElementTypeStaticText[contains(@name,"{}")]'.format(name)),
+            "First Person",
+            "SelectContactPage",
+            self.driver
+        )
+
+    def first_person_under_selected_group(self, group_name):
+        return Utils.find(
+            Text,
+            (MobileBy.XPATH,
+             '(//XCUIElementTypeStaticText[@name="{}"]//parent::XCUIElementTypeCell/following-sibling::XCUIElementTypeCell//XCUIElementTypeStaticText)[2]'.format(
+                 group_name)),
             "First Person",
             "SelectContactPage",
             self.driver
@@ -70,16 +80,16 @@ class SelectContactPage(BasePage):
 
     def select_first_contact(self, value):
         self.search_input.send_keys(value)
-        self.first_person_under_selected_group(value).click()
+        self.first_person_under_search(value).click()
         self.confirm_button.click()
         return value
 
     def search_then_select(self, value):
         return self.select_first_contact(value)
 
-    def select_under_group(self, value):
+    def select_under_group(self, group_name, value):
         self.contact_group.click()
-        self.read_group.click()
-        self.first_person_under_selected_group(value).click()
+        self.contact_group_by_name(group_name).click()
+        self.first_person_under_selected_group(group_name).click()
         self.confirm_button.click()
         return value
