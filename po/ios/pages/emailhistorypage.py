@@ -12,7 +12,6 @@ class EmailHistoryPage(BasePage):
     def __init__(self, appium_driver):
         super(EmailHistoryPage, self).__init__(appium_driver)
 
-    @property
     def first_email_sender(self, value):
         return Utils.find(
             Text,

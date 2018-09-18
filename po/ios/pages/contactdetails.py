@@ -16,7 +16,8 @@ class ContactDetails(BasePage):
     def name(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/name'),
+            (MobileBy.XPATH,
+             '(//XCUIElementTypeNavigationBar[@name="联系人详情"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[1]'),
             "姓名",
             "ContactDetails",
             self.driver
@@ -26,8 +27,8 @@ class ContactDetails(BasePage):
     def email(self):
         return Utils.find(
             Text,
-            (MobileBy.XPATH, '//ios.widget.LinearLayout[@resource-id="cn.cj.pe:id/hjl_email_container"]//\
-            ios.widget.TextView'),
+            (MobileBy.XPATH,
+             '//XCUIElementTypeImage[@name="contacts_ic_email_normal"]//following-sibling::XCUIElementTypeStaticText'),
             "邮箱地址",
             "ContactDetails",
             self.driver

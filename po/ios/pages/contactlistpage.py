@@ -38,7 +38,7 @@ class ContactListPage(BasePage):
     def search_input(self):
         return Utils.find(
             Input,
-            (MobileBy.ACCESSIBILITY_ID, "搜索"),
+            (MobileBy.XPATH, '//XCUIElementTypeSearchField[@name="搜索"]'),
             "联系人搜索框",
             "ContactListPage",
             self.driver

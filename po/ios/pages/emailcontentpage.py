@@ -29,7 +29,7 @@ class EmailContentPage(WriteEmailPage):
     def previous_email_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]/XCUIElementTypeButton[1]'),
+            (MobileBy.XPATH, '//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]/XCUIElementTypeButton[2]'),
             "Previous Button",
             "EmailContent",
             self.driver
@@ -125,10 +125,10 @@ class EmailContentPage(WriteEmailPage):
     def reply_email_success(self):
         sender = self.default_email_sender.text()
         self.reply_button.click()
-        receiver = self.first_receiver.text()
+        # receiver = self.first_receiver.text()
         text = self.subject_input.text()
         self.reply_forward_email_success()
-        return text.startswith("Re"), sender.strip() == receiver.strip()
+        return text.startswith("Re")
 
     def forward_email_success(self):
         self.forward_button.click()
