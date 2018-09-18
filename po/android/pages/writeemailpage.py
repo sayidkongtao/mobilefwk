@@ -225,7 +225,7 @@ class WriteEmailPage(BasePage):
     def send_success_img(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/gif_success_img'),
+            (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/gif_success_img"]'),
             "send_success_img",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
@@ -301,7 +301,7 @@ class WriteEmailPage(BasePage):
     def send_without_subject(self):
         self.send_button.click()
         self.send_direct_button.click()
-        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
+        Utils.wait_until_condition(lambda: self.send_success_img.is_visible())
         self.back_to_email_button.click()
 
     def save_email_to_draft(self, subject):
@@ -318,7 +318,7 @@ class WriteEmailPage(BasePage):
         self.content_input.click()
         self.content_input.send_keys(content)
         self.send_button.click()
-        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
+        Utils.wait_until_condition(lambda: self.send_success_img.is_visible())
         self.back_to_email_button.click()
 
     def send_email_failed(self, contact, subject, content):

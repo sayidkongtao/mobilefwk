@@ -42,7 +42,7 @@ class Demo(CommonUnittest):
         self.android_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.android_pages.writeemailpage.at())
         self.android_pages.writeemailpage.goto_select_contact_page()
-        context = self.android_pages.selectcontactpage.search_then_select("Postmaster")
+        context = self.android_pages.selectcontactpage.search_then_select("Sayid")
         first_receiver = self.android_pages.writeemailpage.first_receiver.text()
         self.assertEqual(context["name"], first_receiver.strip())
 
