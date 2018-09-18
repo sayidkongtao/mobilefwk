@@ -58,5 +58,5 @@ class ContactListPage(BasePage):
         self.search_button.click()
         self.search_input.send_keys(value)
         text = self.first_contact(value).text()
-        self.first_contact.click()
+        self.first_contact(value).click()
         return text

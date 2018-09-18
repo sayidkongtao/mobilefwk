@@ -53,7 +53,7 @@ class Utils:
             WebDriverWait(appium_driver, default_time).until_not(ec.visibility_of(element_obj))
 
     @classmethod
-    def wait_until_condition(cls, method, default_time=30):
+    def wait_until_condition(cls, method, default_time=120):
         end_time = time.time() + default_time
         while True:
             try:
@@ -62,8 +62,8 @@ class Utils:
                     return value
             except Exception as e:
                 cls.logger().warning("Can ignore this info ".format(e))
-                cls.logger().info("Continue to wait")
-            time.sleep(2)
+            cls.logger().info("Continue to wait")
+            time.sleep(10)
             if time.time() > end_time:
                 break
         raise Exception("Timeout to wait for condition")

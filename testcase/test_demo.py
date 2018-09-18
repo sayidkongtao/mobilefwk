@@ -42,7 +42,7 @@ class Demo(CommonUnittest):
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
-        context = self.ios_pages.selectcontactpage.search_then_select("Postmaster")
+        context = self.ios_pages.selectcontactpage.search_then_select("Sayid")
         # first_receiver = self.ios_pages.writeemailpage.first_receiver.text()
         # self.assertEqual(context, first_receiver)
 
@@ -195,15 +195,15 @@ def suite():
             Demo,
             [
                 # "login_4",
-                "goto_write_email_page_5",
-                "select_contact_6",
-                "search_and_select_contact_7",
-                "select_group_contact_8",
-                "delete_receiver_9",
-                "add_cc_bcc_10",
+                # "goto_write_email_page_5",
+                # "select_contact_6",
+                # "search_and_select_contact_7",
+                # "select_group_contact_8",
+                # "delete_receiver_9",
+                # "add_cc_bcc_10",
                 "send_email_without_subject_11",
                 "send_email_success_12",
-                "save_email_to_draft_14",
+                # "save_email_to_draft_14",
                 "send_email_failed_15",
                 "goto_contact_details_16",
                 # "check_previous_email_17",
