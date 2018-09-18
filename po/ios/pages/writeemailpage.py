@@ -229,7 +229,7 @@ class WriteEmailPage(BasePage):
     def send_success_img(self):
         return Utils.find(
             Text,
-            (MobileBy.ACCESSIBILITY_ID, 'send_success7.png'),
+            (MobileBy.ACCESSIBILITY_ID, '已完成'),
             "send_success_img",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
@@ -239,7 +239,7 @@ class WriteEmailPage(BasePage):
     def send_failed_img(self):
         return Utils.find(
             Text,
-            (MobileBy.ACCESSIBILITY_ID, 'write_send_error.png'),
+            (MobileBy.ACCESSIBILITY_ID, '发送失败'),
             "发送失败",
             "SendEmailPageResult_WriteEmailPage",
             self.driver
@@ -302,7 +302,7 @@ class WriteEmailPage(BasePage):
     def send_without_subject(self):
         self.send_button.click()
         self.send_direct_button.click()
-        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
+        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(10))
         self.back_to_email_button.click()
 
     def save_email_to_draft(self, subject):
@@ -319,7 +319,7 @@ class WriteEmailPage(BasePage):
         self.content_input.click()
         self.content_input.send_keys(content)
         self.send_button.click()
-        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
+        Utils.wait_until_condition(lambda: self.send_success_img.is_visible(10))
         self.back_to_email_button.click()
 
     def send_email_failed(self, subject, content):

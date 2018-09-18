@@ -87,7 +87,7 @@ class Demo(CommonUnittest):
         self.ios_pages.writeemailpage.send_without_subject()
         self.ios_pages.messagelistpage.goto_sent_page()
         text = self.ios_pages.messagelistpage.first_email_subject.text()
-        self.assertEqual(text, "无主题")
+        self.assertEqual(text, "(无主题)")
 
     def send_email_success_12(self):
         MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
@@ -202,7 +202,7 @@ def suite():
                 # "delete_receiver_9",
                 # "add_cc_bcc_10",
                 "send_email_without_subject_11",
-                "send_email_success_12",
+                # "send_email_success_12",
                 # "save_email_to_draft_14",
                 "send_email_failed_15",
                 "goto_contact_details_16",

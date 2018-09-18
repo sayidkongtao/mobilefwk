@@ -90,7 +90,7 @@ class MessageListPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '(//XCUIElementTypeNavigationBar[@name="PMInbox"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[3]'),
+             '(//XCUIElementTypeNavigationBar[@name="PMInbox"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeImage//following-sibling::XCUIElementTypeStaticText)[1]'),
             "第一个邮件主题",
             "MessageListPage",
             self.driver
