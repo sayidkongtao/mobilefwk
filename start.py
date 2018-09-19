@@ -16,7 +16,7 @@ from testcase import test_demo
 if __name__ == "__main__":
     # desired_caps
     desired_caps = {
-        "platformName": "ios",
+        "platformName": "iOS",
         "PlatformVersion": "11.4.1",
         "deviceName": "iPhone",
         "newCommandTimeout": 7200,
