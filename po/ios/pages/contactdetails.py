@@ -56,7 +56,7 @@ class ContactDetails(BasePage):
 
     # page logic
     def at(self):
-        Utils.wait_until_condition(lambda: self.title.is_visible())
+        Utils.wait_until_condition(lambda: self.email_history.is_visible())
 
     def goto_email_history(self):
         self.email_history.click()

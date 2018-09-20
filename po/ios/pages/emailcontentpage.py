@@ -115,10 +115,13 @@ class EmailContentPage(WriteEmailPage):
         return first_title != second_title
 
     def check_previous_button(self):
+        Utils.wait_time(3)
         first_title = self.email_title.text()
         self.next_email_button.click()
+        Utils.wait_time(3)
         self.email_title.text()
         self.previous_email_button.click()
+        Utils.wait_time(3)
         second_title = self.email_title.text()
         return first_title == second_title
 

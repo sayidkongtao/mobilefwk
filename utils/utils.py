@@ -71,3 +71,7 @@ class Utils:
     @classmethod
     def now(cls):
         return time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
+
+    @classmethod
+    def wait_time(cls, secs):
+        time.sleep(secs)

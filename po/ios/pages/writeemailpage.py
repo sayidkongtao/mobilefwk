@@ -283,6 +283,7 @@ class WriteEmailPage(BasePage):
 
     def delete_first_contact(self):
         first_receiver = self.first_receiver
+        Utils.wait_time(5)
         first_receiver.tap([(103, 89)], 500)
         delete_receive = self.delete_receive
         delete_receive.click()
