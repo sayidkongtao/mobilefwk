@@ -134,6 +134,10 @@ class BasePageObject(object):
             self.logger.error(e)
             raise e
 
+    def tap(self, positions, duration=None):
+        self.logger.info("tap coordinates {} on page".format(positions, self.page_name))
+        self.__driver.tap(positions, duration)
+
     def set_value_by_keys(self, value):
         self.logger.info("set {} into element {} on page".format(value, self.element_name, self.page_name))
         letterToCodeHashMap = {}
