@@ -28,7 +28,7 @@ class ContactListPage(BasePage):
     def search_button(self):
         return Utils.find(
             Button,
-            (MobileBy.XPATH, '(//android.widget.ImageView[@content-desc="image"])[1]'),
+            (MobileBy.XPATH, '//android.widget.ImageView'),
             "Search Button",
             "ContactListPage",
             self.driver
