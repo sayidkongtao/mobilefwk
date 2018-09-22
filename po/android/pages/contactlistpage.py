@@ -56,7 +56,9 @@ class ContactListPage(BasePage):
 
     #  page logic
     def search_then_select_to_(self, value):
+        Utils.wait_time(2)
         self.search_button.click()
+        Utils.wait_time(3)
         self.search_input.send_keys(value)
         text = self.first_contact.text()
         self.first_contact.click()

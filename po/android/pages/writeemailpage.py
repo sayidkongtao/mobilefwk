@@ -90,7 +90,7 @@ class WriteEmailPage(BasePage):
     def delete_receive(self):
         return Utils.find(
             Button,
-            (MobileBy.ID, "cn.cj.pe:id/delete"),
+            (MobileBy.XPATH, '//*[@text="移除"]'),
             "移除",
             "WriteEmailPage",
             self.driver
