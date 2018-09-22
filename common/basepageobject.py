@@ -112,9 +112,10 @@ class BasePageObject(object):
         self.logger.info("set {} into element {} on page".format(value, self.element_name, self.page_name))
         self.find_element(self.locator).send_keys(value)
 
-    def click(self):
+    def click(self, delay_time=1.5):
         self.logger.info("Click element {} on page {}".format(self.element_name, self.page_name))
         self.find_element(self.locator).click()
+        time.sleep(delay_time)
 
     def text(self):
         text = ""
