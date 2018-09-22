@@ -131,6 +131,7 @@ class BasePage(object):
         return image
 
     def launch_app(self):
+        self.driver.close_app()
         self.driver.launch_app()
 
     def reset(self):
