@@ -15,7 +15,7 @@ from testcase import test_demo
 
 if __name__ == "__main__":
     # desired_caps
-    desired_caps = {
+    desired_caps_bak = {
         "platformName": "Android",
         "PlatformVersion": "6.0",
         "deviceName": "GSL0217214000631",
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    desired_caps_bak = {
+    desired_caps = {
         "platformName": os.getenv('APPIUM_PLATFORM'),
         "PlatformVersion": os.getenv('APPIUM_DEVICE_VERSION'),
         "deviceName": os.getenv('APPIUM_DEVICE_NAME'),
@@ -40,8 +40,8 @@ if __name__ == "__main__":
         "noReset": True
     }
 
-    # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
+    driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
+    #driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
