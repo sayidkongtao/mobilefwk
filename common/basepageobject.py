@@ -104,17 +104,19 @@ class BasePageObject(object):
         self.logger.info("clear text on element {} on page".format(self.element_name, self.page_name))
         self.find_element(self.locator).clear()
 
-    def send_keys(self, value, clear_first=False, click_first=False):
+    def send_keys(self, value, clear_first=False, click_first=False, delay=1.5):
         if click_first:
             self.click()
         if clear_first:
             self.clear()
         self.logger.info("set {} into element {} on page".format(value, self.element_name, self.page_name))
         self.find_element(self.locator).send_keys(value)
+        time.sleep(delay)
 
-    def click(self):
+    def click(self, delay=1.5):
         self.logger.info("Click element {} on page {}".format(self.element_name, self.page_name))
         self.find_element(self.locator).click()
+        time.sleep(delay)
 
     def text(self):
         text = ""

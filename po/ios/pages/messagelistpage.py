@@ -90,7 +90,7 @@ class MessageListPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '(//XCUIElementTypeNavigationBar[@name="PMInbox"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeImage//following-sibling::XCUIElementTypeStaticText)[1]'),
+             '//*[@name="139邮箱(test)"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[3]'),
             "第一个邮件主题",
             "MessageListPage",
             self.driver
@@ -112,7 +112,7 @@ class MessageListPage(BasePage):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '//XCUIElementTypeApplication[@name="139mail"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]'),
+             '//*[@name="139邮箱(test)"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeButton[1]'),
             "联系人",
             "MessageListPage",
             self.driver

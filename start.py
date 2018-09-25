@@ -15,8 +15,8 @@ from testcase import test_demo
 
 if __name__ == "__main__":
     # desired_caps
-    desired_caps = {
-        "platformName": "iOS",
+    desired_caps_bak = {
+        "platformName": "ios",
         "PlatformVersion": "11.4.1",
         "deviceName": "iPhone",
         "newCommandTimeout": 7200,
@@ -26,21 +26,27 @@ if __name__ == "__main__":
         "noReset": "true"
     }
 
-    desired_caps_bak = {
-        "platformName": os.getenv('APPIUM_PLATFORM'),
-        "PlatformVersion": os.getenv('APPIUM_DEVICE_VERSION'),
-        "deviceName": os.getenv('APPIUM_DEVICE_NAME'),
-        "udid": os.getenv('APPIUM_DEVICE_UDID'),
-        "appPackage": os.getenv('APPIUM_APP_PACKAGE'),
-        "appActivity": os.getenv('APPIUM_APP_ACTIVITY'),
-        "bundleId": "com.leadtone.mig.139pe.iPhone",
-        # "app": os.getenv('APPIUM_APP_FILE'),
-        "newCommandTimeout": os.getenv('APPIUM_NEW_COMMAND_TIMEOUT'),
+    desired_caps = {
+        "platformName": "iOS",
+        "PlatformVersion": os.getenv('APP_DEVICE_VERSION'),
+        "deviceName": os.getenv('APP_DEVICE_NAME'),
+        # "deviceName": "iPhone 7",
+        "udid": os.getenv('APP_UDID'),
+        "automationName": "XCUITest",
+        # "appPackage": os.getenv('APPIUM_APP_PACKAGE'),
+        # "appActivity": os.getenv('APPIUM_APP_ACTIVITY'),
+        # "bundleId": "com.leadtone.mig.139pe.iPhone",
+        "bundleId": os.getenv("APP_BUNDLEIDENTIFIER"),
+        "app": os.getenv('APP_PATH'),
+        "webDriverAgentUrl": os.getenv("WEBDRIVERAGENT_URL"),
+        "newCommandTimeout": 7200,
         "noReset": True
     }
-
+    print desired_caps
+    # driver = webdriver.Remote(os.getenv("WEBDRIVERAGENT_URL"), desired_caps)
     # driver = webdriver.Remote(os.getenv('APPIUM_URL'), desired_caps)
-    driver = webdriver.Remote("http://10.10.58.13:4723/wd/hub", desired_caps)
+
+    driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)
 
     globalvariable.init(desired_caps.get("deviceName", "unknown"), desired_caps.get("platformName", "Android"))
     globalvariable.set_value("APPIUM_DRIVER", driver)
