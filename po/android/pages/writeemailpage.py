@@ -269,6 +269,7 @@ class WriteEmailPage(BasePage):
     def goto_select_contact_page(self):
         self.logger.info("goto_select_contact_page")
         self.add_to_button.click()
+        self.accept_right()
 
     def give_up_send_email(self):
         self.logger.info("give_up_send_email")

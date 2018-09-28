@@ -90,6 +90,8 @@ class SelectContactPage(BasePage):
         return context
 
     def search_then_select(self, value):
+        self.search_input.click()
+        self.accept_right()
         self.search_input.send_keys(value)
         return self.select_first_contact()
 
