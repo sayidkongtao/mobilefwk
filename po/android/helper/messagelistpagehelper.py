@@ -32,8 +32,6 @@ class MessageListHelper(object):
     def goto_sent_page(cls, page):
         cls.logger().info("goto_sent_page")
         if isinstance(page, MessageListPage):
-            page.dismiss_right()
-            page.accept_right()
             page.check_update()
             page.goto_sent_page()
             page.at()
