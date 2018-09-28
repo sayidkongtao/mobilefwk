@@ -29,14 +29,25 @@ class MessageListHelper(object):
             raise AttributeError("parameter android_pages is not instance of AndroidPages")
 
     @classmethod
-    def relaunch_app(cls, page):
-        cls.logger().info("relaunch_app")
+    def goto_sent_page(cls, page):
+        cls.logger().info("goto_sent_page")
+        if isinstance(page, MessageListPage):
+            page.dismiss_right()
+            page.accept_right()
+            page.check_update()
+            page.goto_sent_page()
+            page.at()
+            page.wait_for_page_fresh()
+            Utils.wait_time(3)
+        else:
+            raise AttributeError("parameter page is not instance of MessageListPage")
+
+    @classmethod
+    def relaunch_app_1(cls, page):
+        cls.logger().info("goto_sent_page")
         if isinstance(page, MessageListPage):
             page.launch_app()
             page.at()
             page.wait_for_page_fresh()
         else:
             raise AttributeError("parameter page is not instance of MessageListPage")
-
-
-

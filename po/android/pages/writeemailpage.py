@@ -289,10 +289,10 @@ class WriteEmailPage(BasePage):
     def add_cc_bcc(self):
         self.cc_bcc_item.click()
         self.cc_item.click()
-        self.cc_item.send_keys("test")
+        self.cc_item.send_keys("test@aa.com")
         self.receive_label.click()
         self.bcc_item.click()
-        self.bcc_item.send_keys("test")
+        self.bcc_item.send_keys("test@aa.com")
         self.receive_label.click()
         cc_text = self.first_p_under_cc_item.text()
         bcc_text = self.first_p_under_bcc_item.text()
