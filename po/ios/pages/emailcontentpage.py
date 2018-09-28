@@ -103,7 +103,7 @@ class EmailContentPage(WriteEmailPage):
     # page logic
     def reply_forward_email_success(self):
         self.send_button.click()
-        if self.confirm_contains_old_email_button.is_visible(5):
+        if self.confirm_contains_old_email_button.is_visible():
             self.confirm_contains_old_email_button.click()
         Utils.wait_until_condition(lambda: self.send_success_img.is_visible(60))
         self.back_to_email_button.click()

@@ -269,16 +269,17 @@ class WriteEmailPage(BasePage):
 
 # page logic
     def at(self):
-        return self.add_to_button.is_visible(20)
+        return self.add_to_button.is_visible()
 
     def goto_select_contact_page(self):
         self.logger.info("goto_select_contact_page")
         self.add_to_button.click()
+        self.accept_right()
 
     def give_up_send_email(self):
         self.logger.info("give_up_send_email")
         self.goto_message_button.click()
-        if self.give_up_email_button.is_visible(15):
+        if self.give_up_email_button.is_visible():
             self.give_up_email_button.click()
 
     def delete_first_contact(self):

@@ -79,6 +79,8 @@ class SelectContactPage(BasePage):
 # page Logic
 
     def select_first_contact(self, value):
+        self.search_input.click()
+        self.accept_right()
         self.search_input.send_keys(value)
         self.first_person_under_search(value).click()
         self.confirm_button.click()

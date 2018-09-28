@@ -42,7 +42,7 @@ class Utils:
             return obj
 
     @classmethod
-    def wait_disappear(cls, element_obj, appium_driver=None, default_time=30):
+    def wait_disappear(cls, element_obj, appium_driver=None, default_time=300):
         if isinstance(element_obj, BasePageObject):
             element_obj.to_disappear()
 
@@ -53,7 +53,7 @@ class Utils:
             WebDriverWait(appium_driver, default_time).until_not(ec.visibility_of(element_obj))
 
     @classmethod
-    def wait_until_condition(cls, method, default_time=120):
+    def wait_until_condition(cls, method, default_time=300):
         end_time = time.time() + default_time
         while True:
             try:

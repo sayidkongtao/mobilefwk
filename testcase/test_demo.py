@@ -23,12 +23,12 @@ class Demo(CommonUnittest):
         MessageListHelper.login(self.ios_pages)
 
     def goto_write_email_page_5(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
 
     def select_contact_6(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -38,7 +38,7 @@ class Demo(CommonUnittest):
         giveupemailhelper.give_up(self.driver)
 
     def search_and_select_contact_7(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -47,7 +47,7 @@ class Demo(CommonUnittest):
         # self.assertEqual(context, first_receiver)
 
     def select_group_contact_8(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -57,7 +57,7 @@ class Demo(CommonUnittest):
         giveupemailhelper.give_up(self.driver)
 
     def delete_receiver_9(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -68,7 +68,7 @@ class Demo(CommonUnittest):
         giveupemailhelper.give_up(self.driver)
 
     def add_cc_bcc_10(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         cc_text, bcc_text = self.ios_pages.writeemailpage.add_cc_bcc()
@@ -77,7 +77,7 @@ class Demo(CommonUnittest):
         giveupemailhelper.give_up(self.driver)
 
     def send_email_without_subject_11(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -90,7 +90,7 @@ class Demo(CommonUnittest):
         self.assertEqual(text, "(无主题)")
 
     def send_email_success_12(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -102,7 +102,7 @@ class Demo(CommonUnittest):
         self.ios_pages.writeemailpage.send_email_with_subject_content(subject, context)
 
     def save_email_to_draft_14(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         self.ios_pages.writeemailpage.goto_select_contact_page()
@@ -116,7 +116,7 @@ class Demo(CommonUnittest):
         self.assertEqual(text, subject)
 
     def send_email_failed_15(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_write_email_page()
         self.assertTrue(self.ios_pages.writeemailpage.at())
         subject = Utils.now()
@@ -126,14 +126,14 @@ class Demo(CommonUnittest):
         self.ios_pages.writeemailpage.send_email_failed(subject, context)
 
     def goto_contact_details_16(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_contact_list_page()
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         self.logger.info("Check: 此页面为联系人详情页面")
         self.ios_pages.contactdetailspage.at()
 
     def check_previous_email_17(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_contact_list_page()
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.ios_pages.contactdetailspage.name.text()
@@ -146,7 +146,7 @@ class Demo(CommonUnittest):
         self.assertTrue(reuslt)
 
     def check_next_email_18(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_contact_list_page()
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.ios_pages.contactdetailspage.name.text()
@@ -159,7 +159,7 @@ class Demo(CommonUnittest):
         self.assertTrue(reuslt)
 
     def check_reply_email_19(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_contact_list_page()
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.ios_pages.contactdetailspage.name.text()
@@ -172,7 +172,7 @@ class Demo(CommonUnittest):
         self.assertTrue(re)
 
     def check_forward_email_20(self):
-        MessageListHelper.relaunch_app(self.ios_pages.messagelistpage)
+        MessageListHelper.goto_sent_page(self.ios_pages.messagelistpage)
         self.ios_pages.messagelistpage.goto_contact_list_page()
         name = self.ios_pages.contactlistpage.search_then_select_to_contentdetails("Sayid")
         check_name = self.ios_pages.contactdetailspage.name.text()

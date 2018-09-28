@@ -119,3 +119,9 @@ class BasePage(object):
 
     def reset(self):
         self.driver.reset()
+
+    def accept_right(self):
+        self.driver.switch_to.alert.accept()
+
+    def dismiss_right(self):
+        self.driver.switch_to.alert.dismiss()

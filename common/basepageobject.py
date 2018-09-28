@@ -20,7 +20,7 @@ class BasePageObject(object):
 
     # LOCATOR = (MobileBy.XPATH, "//button")
 
-    def __init__(self, locator, element_name, page_name, search_context, default_time=30):
+    def __init__(self, locator, element_name, page_name, search_context, default_time=300):
         self.locator = locator
         self.element_name = element_name
         self.__driver = search_context
@@ -57,15 +57,15 @@ class BasePageObject(object):
             self.logger.warning("failed to capture the screenshot, {}".format(e))
             # folder = "unknown"
 
-    def find_element(self, visible=True):
+    def find_element(self, visible=True, poll_frequency=2):
         result = "pass"
         try:
             if visible:
-                return WebDriverWait(self.__driver, self.default_time).until(
+                return WebDriverWait(self.__driver, self.default_time, poll_frequency).until(
                     ec.visibility_of_element_located(self.locator)
                 )
             else:
-                return WebDriverWait(self.__driver, self.default_time).until(
+                return WebDriverWait(self.__driver, self.default_time, poll_frequency).until(
                     ec.presence_of_element_located(self.locator)
                 )
         except Exception as e:
@@ -78,15 +78,15 @@ class BasePageObject(object):
         finally:
             self.__capture_screenshot(result)
 
-    def find_elements(self, visible=True):
+    def find_elements(self, visible=True, poll_frequency=2):
         result = "pass"
         try:
             if visible:
-                WebDriverWait(self.__driver, self.default_time).until(
+                WebDriverWait(self.__driver, self.default_time, poll_frequency).until(
                     ec.visibility_of_all_elements_located(self.locator)
                 )
             else:
-                WebDriverWait(self.__driver, self.default_time).until(
+                WebDriverWait(self.__driver, self.default_time, poll_frequency).until(
                     ec.presence_of_all_elements_located(self.locator)
                 )
 
@@ -113,7 +113,7 @@ class BasePageObject(object):
         self.find_element(self.locator).send_keys(value)
         time.sleep(delay)
 
-    def click(self, delay=1.5):
+    def click(self, delay=3):
         self.logger.info("Click element {} on page {}".format(self.element_name, self.page_name))
         self.find_element(self.locator).click()
         time.sleep(delay)
@@ -154,14 +154,15 @@ class BasePageObject(object):
             self.press_key(code)
             time.sleep(0.5)
 
-    def is_visible(self, default_time=10):
+    def is_visible(self, default_time=300, poll_frequency=2):
         try:
-            WebDriverWait(self.__driver, default_time).until(
+            WebDriverWait(self.__driver, default_time, poll_frequency).until(
                 ec.visibility_of_element_located(self.locator)
             )
             self.logger.info(
                 "to check element {} on page {} visible: {}".format(self.element_name, self.page_name, True)
             )
+
             return True
         except TimeoutException:
             self.logger.info(
@@ -169,9 +170,9 @@ class BasePageObject(object):
             )
             return False
 
-    def to_disappear(self, default_time=45):
+    def to_disappear(self, default_time=300, poll_frequency=2):
         try:
-            WebDriverWait(self.__driver, default_time).until_not(
+            WebDriverWait(self.__driver, default_time, poll_frequency).until_not(
                 ec.visibility_of_element_located(self.locator)
             )
             self.logger.info(

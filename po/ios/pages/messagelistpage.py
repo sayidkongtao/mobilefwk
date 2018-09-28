@@ -159,13 +159,13 @@ class MessageListPage(BasePage):
     def goto_write_email_page(self):
         self.logger.info("goto_write_email_page")
         self.write_email_button.click()
+        self.accept_right()
 
     def goto_sent_page(self):
         self.more_button.click()
         self.sent_email.click()
         # Utils.wait_until_condition(lambda: self.title.text() == "已发送")
         Utils.wait_until_condition(lambda: self.write_email_button.is_visible())
-        self.wait_for_page_fresh()
 
     def goto_draft_page(self):
         self.more_button.click()
