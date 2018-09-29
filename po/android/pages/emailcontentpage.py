@@ -39,8 +39,8 @@ class EmailContentPage(WriteEmailPage):
     def email_title(self):
         return Utils.find(
             Text,
-            (MobileBy.ID, 'cn.cj.pe:id/title'),
-            "邮件主题",
+            (MobileBy.XPATH, '//*[@resource-id="cn.cj.pe:id/date"]'),
+            "邮件时间",
             "EmailContent",
             self.driver
         )
