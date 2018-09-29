@@ -33,6 +33,7 @@ class MessageListHelper(object):
     def goto_sent_page(cls, page):
         cls.logger().info("goto_sent_page")
         if isinstance(page, MessageListPage):
+            Utils.wait_time(5)
             page.dismiss_right()
             page.accept_right()
             page.goto_sent_page()
