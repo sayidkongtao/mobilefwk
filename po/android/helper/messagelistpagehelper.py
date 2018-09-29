@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Tao Kong'
 
-from po.android.pages.messagelistpage import MessageListPage
-from po.android.androdpages import AndroidPages
-from utils.utils import Utils
 import logging
+
 from common import globalvariable
+from po.android.androdpages import AndroidPages
+from po.android.pages.messagelistpage import MessageListPage
+from utils.utils import Utils
 
 
 class MessageListHelper(object):
@@ -41,7 +42,7 @@ class MessageListHelper(object):
             raise AttributeError("parameter page is not instance of MessageListPage")
 
     @classmethod
-    def relaunch_app_1(cls, page):
+    def relaunch_app_bak(cls, page):
         cls.logger().info("goto_sent_page")
         if isinstance(page, MessageListPage):
             page.launch_app()
