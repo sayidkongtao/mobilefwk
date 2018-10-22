@@ -39,7 +39,7 @@ if __name__ == "__main__":
         "bundleId": os.getenv("APP_BUNDLEIDENTIFIER"),
         "app": os.getenv('APP_PATH'),
         "webDriverAgentUrl": os.getenv("WEBDRIVERAGENT_URL"),
-        "newCommandTimeout": 7200,
+        "newCommandTimeout": "7200",
         "noReset": True
     }
     print desired_caps

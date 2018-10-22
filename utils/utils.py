@@ -20,7 +20,7 @@ class Utils:
         return logging.getLogger(globalvariable.get_value("LOGGER_NAME"))
 
     @classmethod
-    def find(cls, page_object_class, locator, element_name, page_name, search_context, default_time=30):
+    def find(cls, page_object_class, locator, element_name, page_name, search_context, default_time=300):
         obj = page_object_class(locator, element_name, page_name, search_context, default_time)
         if isinstance(obj, BasePageObject):
             return obj

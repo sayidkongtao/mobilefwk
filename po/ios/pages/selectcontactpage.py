@@ -19,7 +19,7 @@ class SelectContactPage(BasePage):
         return Utils.find(
             Input,
             (MobileBy.XPATH,
-             '//XCUIElementTypeImage[@name="nav_btn_search_focused"]//parent::XCUIElementTypeOther//XCUIElementTypeSearchField'),
+             '//XCUIElementTypeOther/XCUIElementTypeSearchField'),
             "search_input",
             "SelectContactPage",
             self.driver

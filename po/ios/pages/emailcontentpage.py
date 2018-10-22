@@ -36,12 +36,12 @@ class EmailContentPage(WriteEmailPage):
         )
 
     @property
-    def email_title(self):
+    def email_time(self):
         return Utils.find(
             Text,
             (MobileBy.XPATH,
-             '(//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[1]'),
-            "邮件主题",
+             '(//XCUIElementTypeNavigationBar[@name="PMMailDetailsVC2"]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText)[3]'),
+            "邮件Time",
             "EmailContent",
             self.driver
         )
@@ -109,20 +109,20 @@ class EmailContentPage(WriteEmailPage):
         self.back_to_email_button.click()
 
     def check_next_button(self):
-        first_title = self.email_title.text()
+        first_title = self.email_time.text()
         self.next_email_button.click()
-        second_title = self.email_title.text()
+        second_title = self.email_time.text()
         return first_title != second_title
 
     def check_previous_button(self):
         Utils.wait_time(3)
-        first_title = self.email_title.text()
+        first_title = self.email_time.text()
         self.next_email_button.click()
         Utils.wait_time(3)
-        self.email_title.text()
+        self.email_time.text()
         self.previous_email_button.click()
         Utils.wait_time(3)
-        second_title = self.email_title.text()
+        second_title = self.email_time.text()
         return first_title == second_title
 
     def reply_email_success(self):

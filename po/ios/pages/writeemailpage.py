@@ -39,7 +39,7 @@ class WriteEmailPage(BasePage):
     def add_to_button(self):
         return Utils.find(
             Button,
-            (MobileBy.ACCESSIBILITY_ID, "write add user"),
+            (MobileBy.XPATH, '//XCUIElementTypeButton[@name="write add user"]'),
             "add_to_button",
             "WriteEmailPage",
             self.driver
